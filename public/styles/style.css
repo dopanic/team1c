@@ -1,8 +1,21 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* You can add global styles to this file, and also import other style files */
+
+/*  title */
+#top_title
+{
+    font-family: 'Lobster', cursive;
 }
 
-a {
-  color: #00B7FF;
+/* Button */
+#saveBtn
+{
+    background-color: rgb(244, 201, 20);
+    border: 0;
+    outline: 0;
+}
+#cancelBtn
+{
+    background-color: rgb(136, 136, 136);
+    border: 0;
+    outline: 0;
 }
