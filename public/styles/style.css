@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-/*  title */
+/*  titles */
 #top_title
 {
     font-family: 'Lobster', cursive;
 }
 
-/* Button */
+/* Buttons */
 #saveBtn
 {
     background-color: rgb(244, 201, 20);
