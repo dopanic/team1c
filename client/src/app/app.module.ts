@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { SurveyComponent } from './pages/survey/survey.component';
 import { BasePageComponent } from './partials/base-page/base-page.component';
 
+import { ApiService } from './services/api.service';
+
 
 @NgModule({
   declarations: [
@@ -23,15 +26,15 @@ import { BasePageComponent } from './partials/base-page/base-page.component';
     AboutComponent,
     LandingComponent,
     SurveyComponent,
-    BasePageComponent,
-   
+    BasePageComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     SurveyListModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
