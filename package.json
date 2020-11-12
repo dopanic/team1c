@@ -1,9 +1,9 @@
 {
   "name": "team1c",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && ng build --output-path dist"
   },
   "dependencies": {
@@ -25,7 +25,8 @@
     "passport-local-mongoose": "^6.0.1",
     "popper.js": "^1.16.1",
     "@angular/cli": "~10.2.0",
-    "@angular/compiler-cli": "~10.2.0"
+    "@angular/compiler-cli": "~10.2.0",
+    "@angular-devkit/build-angular": "~0.1002.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
