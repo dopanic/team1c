@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "build": "cd client && npm run build",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
@@ -25,8 +30,6 @@
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6",
-    "@angular/cli": "^11.0.0",
-    "@angular/compiler-cli": "^11.0.0"
+    "nodemon": "^2.0.6"
   }
 }
