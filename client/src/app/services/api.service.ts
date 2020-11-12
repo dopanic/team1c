@@ -13,14 +13,14 @@ export class ApiService {
 
   baseUri: string;
 
-  private httpOptions =
-    {
-        headers: new  HttpHeaders({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-        })
-    }; 
+  // private httpOptions =
+  //   {
+  //       headers: new  HttpHeaders({
+  //           'Content-Type': 'application/json',
+  //           'Access-Control-Allow-Origin': '*',
+  //           'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+  //       })
+  //   }; 
 
   constructor(private http: HttpClient) {
     this.baseUri = `${PROTOCOL}://${location.hostname}:${PORT}`;
@@ -35,13 +35,13 @@ export class ApiService {
   // read: get a one survey
   getSurveyOne(id: string): Observable<any> {
     const url = `${this.baseUri}/survey/view/${id}`;
-    return this.http.get(url, { headers: this.httpOptions.headers });
+    return this.http.get(url);
   }
 
   // update: edit a survey
   updateSurvey(id: string, data: any): Observable<any> {
     const url = `${this.baseUri}/survey/edit/${id}`;
-    return this.http.post(url, data, { headers: this.httpOptions.headers });
+    return this.http.post(url, data);
   }
 
   // create: add a survey
@@ -53,7 +53,7 @@ export class ApiService {
   // delete: delete a survey
   removeSurvey(id): Observable<any> {
     const url = `${this.baseUri}/survey/del/${id}`;
-    return this.http.get(url, { headers: this.httpOptions.headers });
+    return this.http.get(url);
   }
 
 }
