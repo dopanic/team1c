@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./server.js"
+    "start": "node ./server.js",    
+    "postinstall": "ng build --output-path dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
@@ -25,6 +26,8 @@
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "@angular/cli": "^11.0.0",
+    "@angular/compiler-cli": "^11.0.0"
   }
 }
