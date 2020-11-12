@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server",
-    "postinstall": "cd client && npm install && ng build --output-path dist"
+    "heroku-postbuild": "cd client && npm install && ng build --output-path dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
