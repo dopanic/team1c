@@ -48,12 +48,6 @@ let app = express();
 //   next();
 // });
 
-// Heroku
-app.use(express.static(path.join(__dirname, "client/build")));
-  app.get("*", (req, res)=>{
-    res.sendFile(path.join(__dirname, "client/build",'index.html'));
-  })
-
 // view engine setup
 app.set('views', path.join(process.cwd(), './server/views'));
 app.set('view engine', 'ejs');
