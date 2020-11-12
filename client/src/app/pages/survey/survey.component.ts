@@ -1,19 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePageComponent } from '../../partials/base-page/base-page.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../services/api.service'; // Express API
 
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.css']
 })
-export class SurveyComponent extends BasePageComponent implements OnInit {
+export class SurveyComponent implements OnInit {
 
-  constructor(route: ActivatedRoute) {
-    super(route);
-   }
+  surveys: any = [];
+
+  constructor(
+    private actRoute: ActivatedRoute,
+    private apiService: ApiService,
+    private router: Router
+  ) {
+    // super(route);
+    this.getSurveyList();
+  }
 
   ngOnInit(): void {
+    // this.title = 'ABCD?';
+  }
+
+  getSurveyList(): void {
+    this.apiService.getSurveyList().subscribe(data => {
+      this.surveys = data;
+    });
+  }
+
+  removeSurvey(survey: any, index: number): void {
+    if (window.confirm('Are you sure?')) {
+      this.apiService.removeSurvey(survey._id).subscribe(data => {
+        this.surveys.splice(index, 1);
+      });
+    }
   }
 
 }

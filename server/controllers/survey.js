@@ -1,50 +1,65 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// Survey model
 const Survey = require('../models/survey');
 
-// api: read to get a full list
-module.exports.apiGetList = (req, res, next) => {
-  Survey.find((error, surveyList) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(surveyList)
-      }
+// api: display all survey list
+module.exports.displaySurveyList = (req, res, next)=>{
+    Survey.find((err, surveyList) =>{
+        if(err) {
+            return console.error(err);
+        } else {
+            res.json(surveyList);
+        }
+    });
+}
+
+// api: add new survey
+module.exports.createSurvey = (req, res, next)=>{
+    Survey.create(req.body, (err, newSurvey) =>{
+        if(err) {
+            return console.error(err);
+        } else {
+            res.json(newSurvey);
+        }
+    });
+}
+
+// api: display one survey
+module.exports.viewSurvey = (req, res, next)=>{
+    Survey.findById(req.params.id, (err, targetSurvey) => {
+        if(err) {
+            return console.error(err);
+        } else {
+            res.json(targetSurvey);
+        }
     })
 }
 
-// api: create to add a new survey
-module.exports.apiAddSurvey = (req, res, next) => {
-  Survey.create(req.body, (error, newSurvey) => {
-    if (error) {
-      return next(error)
-    } else {
-      res.json(newSurvey)
-    }
-  })
+// api: update the edited survey
+module.exports.editSurvey = (req, res, next)=>{
+    Survey.findByIdAndUpdate(req.params.id,{
+        $set: req.body
+    }, (err, editedSurvey) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.json(editedSurvey);
+            console.log('The edited survey updated successfully');
+        }
+    })
 }
 
-// JUST FOR A TEST: MUST BE REMOVED BEFORE DEPLOYMENT
-module.exports.testAddSurvey = (req, res, next) => {
-  let newSurvey = Survey({
-      "question": "Test.Q1",
-      "answer": "Test.A1"
-  });
-
-  Survey.create(newSurvey, (err, Survey) => {
-      if(err)
-      {
-          console.log(err);
-          res.end(err);
-      }
-      else
-      {
-          // refresh the list
-          console.log('DONE');
-          res.redirect('/survey');
-      }
-  });
+// api: delete a survey
+module.exports.deleteSurvey = (req, res, next)=>{
+    Survey.findByIdAndRemove(req.params.id, (err, deletedSurvey) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.status(200).json({
+                msg: deletedSurvey
+            })
+        }
+    })
 }

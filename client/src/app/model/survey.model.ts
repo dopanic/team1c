@@ -1,12 +1,9 @@
 export class Survey
 {
-    // constructor(
-    //     public _id?: number,
-    //     public name?: string,
-    //     public email?: string,
-    //     public published?: string
+    constructor(
+        public _id?: string,
+        public title?: string,
+        public questions?: string[]
 
-    // ){}
-    question: string;
-    answer: string;
+    ){}
 }

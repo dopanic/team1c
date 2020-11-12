@@ -1,15 +1,22 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const surveyController = require('../controllers/survey');
 
-// read: get the full list
-router.get('/', surveyController.apiGetList);
-// create: create a survey
-router.post('/add', surveyController.apiAddSurvey);
+// api: display all survey list
+router.get('/list', surveyController.displaySurveyList);
 
+// api: add new survey
+router.post('/add', surveyController.createSurvey);
 
-// JUST FOR A TEST: MUST BE REMOVED BEFORE DEPLOYMENT
-router.get('/test', surveyController.testAddSurvey);
+// api: display one survey
+router.get('/view/:id', surveyController.viewSurvey);
+
+// api: update the edited survey
+router.post('/edit/:id', surveyController.editSurvey);
+
+// api: delete a survey
+router.get('/del/:id', surveyController.deleteSurvey);
 
 module.exports = router;

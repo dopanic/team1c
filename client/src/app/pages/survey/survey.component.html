@@ -1,1 +1,25 @@
-<app-base-page></app-base-page>
+<div class="container">
+    <div class="row">
+        <div class="col-9 p-2">
+            <!-- surveys-->
+            <div class="btn-group">
+                <a href="survey/add" class="btn btn-primary" role = "button">
+                    <i class="fas fa-plus-circle"></i> Add a new survey
+                </a>
+            </div>
+            <div *ngFor = 'let survey of surveys; index as i' class="card m-1 p-1 bg-light">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{survey.title}}
+                    </h4>
+                    <a href="survey/edit/{{survey._id}}" class="btn btn-secondary btn-sm" role = "button">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <button class="btn btn-danger btn-sm" role = "button" (click)="removeSurvey(survey, i)">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

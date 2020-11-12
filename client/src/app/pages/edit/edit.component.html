@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-9 p-2">
+            <!-- form-->
+            <h1>Edit Survey</h1>
+            <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input formControlName="title"
+                    class="form-control"
+                    placeholder="Type the title of the survey"
+                    name="title"
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="question1">Question1</label>
+                    <input formControlName="question1"
+                    class="form-control"
+                    placeholder="Type the question"
+                    name="question1"
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="question2">Question2</label>
+                    <input formControlName="question2"
+                    class="form-control"
+                    placeholder="Type the question"
+                    name="question2"
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="question3">Question3</label>
+                    <input formControlName="question3"
+                    class="form-control"
+                    placeholder="Type the question"
+                    name="question3"
+                    required>
+                </div>
+                <!-- <div *ngFor='let question of questions; index as i' class="form-group">
+                    <label for="question{{i+1}}">Question {{i+1}}</label>
+                    <input formControlName="question{{i+1}}"
+                    class="form-control"
+                    placeholder="{{question.question.questionBody}}"
+                    name="question{{i+1}}"
+                    required>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="/survey" type="submit" class="btn btn-danger">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
