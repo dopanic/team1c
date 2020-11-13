@@ -1,17 +1,17 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-9 p-2">
+        <div class="col-8 p-2">
             <!-- surveys-->
             <div class="btn-group">           
             </div>
             <h1>&nbsp;&nbsp;&nbsp;&nbsp;Active Surveys</h1>
-            <div *ngFor = 'let survey of surveys; index as i' class="card m-1 p-1 bg-light" >       
+            <div *ngFor = 'let survey of surveys; index as i' class=" card m-1 p-1 bg-light" >       
                 <div class="card-body">
                     <table class="tg">
                         <thead>
                         <tr>
-                            <th class="text-left col-2">
+                            <th class="text-left col-3">
                                 <h4 class="card-title">
                                     {{survey.title}}
                                 </h4>
