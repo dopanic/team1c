@@ -1,8 +1,8 @@
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
 
-let surveyController = require('../controllers/survey');
+const surveyController = require('../controllers/survey');
 
 // api: display all survey list
 router.get('/list', surveyController.displaySurveyList);

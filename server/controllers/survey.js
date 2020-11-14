@@ -1,8 +1,8 @@
-let express = require("express");
-let router = express.Router();
-let mongoose = require('mongoose');
+const express = require("express");
+const router = express.Router();
+const mongoose = require('mongoose');
 
-let Survey = require('../models/survey');
+const Survey = require('../models/survey');
 
 // api: display all survey list
 module.exports.displaySurveyList = (req, res, next)=>{

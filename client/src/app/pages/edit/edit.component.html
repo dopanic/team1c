@@ -1,76 +1,52 @@
-<main class="container" style="width: 650px;">
-    <div class="jumbotron">
-        <div class="center">
-        <h1>Edit Survey</h1>
-        </div>
-        <hr>  
-
-        <!--
-        <div class="form-group">
-            <label for="dueDate">  Closing Time</label>
-            <input type="date" class="form-control"
-            id="dueDate"
-            name="dueDate" required>
-        </div>  -->
-        <hr>  
-            <form #form = 'ngForm' novalidate (ngSubmit) = 'submitOrder(form)'>
+<div class="container">
+    <div class="row">
+        <div class="col-9 p-2">
+            <!-- form-->
+            <h1> Survey</h1>
+            <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for=title>  Title</label>
-                    <input  name = 'title' class="form-control"
-                    id="title"
-                    #title = 'ngModel'
-                    [(ngMode)] = 'survey.Title'
-                    placeholder="Title"
-                    name="title" required>
-                </div>  
+                    <label for="title">Title</label>
+                    <input formControlName="title"
+                    class="form-control"
+                    placeholder="Type the title of the survey"
+                    name="title"
+                    required>
+                </div>
                 <div class="form-group">
-                    
-                    <label for="Q1">  Question 1</label>
-                    <input  class="form-control"
-                    #q1 = 'ngModel' 
-                    [(ngMode)] = 'survey.questions[1]'
-                    id="Q1"
-                    placeholder="Enter your question"
-                    name="Q1" required>
-                </div>    
-                
+                    <label for="question1">Question1</label>
+                    <input formControlName="question1"
+                    class="form-control"
+                    placeholder="Type the question"
+                    name="question1"
+                    required>
+                </div>
                 <div class="form-group">
-                    <label for="Q2">  Question 2</label>
-                    <input type="text" class="form-control"
-                    #q2 = 'ngModel'
-                    [(ngMode)] = 'survey.questions[2]'
-                    id="Q2"
-                    placeholder="Enter your question"
-                    name="Q2" >
-                </div>  
-
+                    <label for="question2">Question2</label>
+                    <input formControlName="question2"
+                    class="form-control"
+                    placeholder="Type the question"
+                    name="question2"
+                    required>
+                </div>
                 <div class="form-group">
-                    <label for="Q1">  Question 3</label>
-                    <input type="text" class="form-control"
-                    id="Q3"
-                    [(ngMode)] = 'survey.questions[3]'
-                    #q3 = 'ngModel'
-                    placeholder="Enter your question"
-                    name="Q3" >
-                </div>  
-
-                <div class="form-group">
-                    <label for="Q4">  Question 4</label>
-                    <label for="Q4"></label>
-                    <input type="text" class="form-control"
-                    id="Q4"
-                    #q4 = 'ngModel'
-                    [(ngMode)] = 'survey.questions[4]'
-                    placeholder="Enter your question"
-                    name="Q4" >
-                </div> 
-                
-                <div class="center">
-                <button type="submit" class="btn btn-warning">Submit</button> 
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <button type="submit" class="btn btn-secondary">Cancel</button>
-                    </div>
+                    <label for="question3">Question3</label>
+                    <input formControlName="question3"
+                    class="form-control"
+                    placeholder="Type the question"
+                    name="question3"
+                    required>
+                </div>
+                <!-- <div *ngFor='let question of questions; index as i' class="form-group">
+                    <label for="question{{i+1}}">Question {{i+1}}</label>
+                    <input formControlName="question{{i+1}}"
+                    class="form-control"
+                    placeholder="{{question.question.questionBody}}"
+                    name="question{{i+1}}"
+                    required>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="/survey" type="submit" class="btn btn-danger">Cancel</a>
             </form>
+        </div>
     </div>
-    </main>
-
+</div>

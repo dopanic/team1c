@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 mongoose.connect(process.env.mongoDB_URL, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 // catch the error during the connection to MongoDB Atlas

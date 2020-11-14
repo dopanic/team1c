@@ -1,36 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddComponent } from './pages/add/add.component';
-import { SurveyListModule } from './survey-list/survey-list.module';
-import { PagesModule } from './pages/pages.module';
-import { PartialsModule } from './partials/partials.modules';
-import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
 
-export function jwtTokenGetter(): string
-{
-  return localStorage.getItem('id_token');
-}
+import { HeaderComponent } from './partials/header/header.component';
+import { FooterComponent } from './partials/footer/footer.component';
+
+import { SurveyComponent } from './pages/survey/survey.component';
+import { EditComponent } from './pages/edit/edit.component';
+
+import { ApiService } from './services/api.service';
+
 @NgModule({
   declarations: [
     AppComponent,
-    AddComponent
+    HeaderComponent,
+    FooterComponent,
+    SurveyComponent,
+    EditComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    SurveyListModule,
-    PagesModule,
-    PartialsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: jwtTokenGetter
-      }
-    })
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
