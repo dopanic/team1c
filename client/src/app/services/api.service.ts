@@ -65,7 +65,7 @@ export class ApiService {
   authenticate(user: User): Observable<any>
   {
     const url = `${this.baseUri}/login`;
-    return this.http.post<any>(url,user);
+    return this.http.post<any>(url,user, this.httpOptions);
   }
   storeUserData(token: any, user:User): void
   {
@@ -86,6 +86,11 @@ export class ApiService {
 
     return this.http.get<any>(this.baseUri);
 
+  }
+  getSurveys(): Observable<any>
+  {
+    this.loadToken();
+    return this.http.get<any>(this.baseUri+'surveys');
   }
   private loadToken(): void
   {
