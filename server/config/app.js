@@ -4,6 +4,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let cors = require('cors');
 
 // dotenv: environment variables
 require('dotenv').config();
@@ -28,6 +29,8 @@ const { setegid } = require('process');
 
 let app = express();
 
+app.use(cors());
+/*
 // enable CROC
 app.use(function (req, res, next) {
 
@@ -47,7 +50,7 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
+*/
 // view engine setup
 app.set('views', path.join(process.cwd(), './server/views'));
 app.set('view engine', 'ejs');
