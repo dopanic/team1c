@@ -65,7 +65,7 @@ export class ApiService {
   authenticate(user: User): Observable<any>
   {
     const url = `${this.baseUri}/login`;
-    return this.http.post<any>(url,user, this.httpOptions);
+    return this.http.post<any>(url,user);
   }
   storeUserData(token: any, user:User): void
   {
