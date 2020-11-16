@@ -14,7 +14,14 @@ import { SurveyComponent } from './pages/survey/survey.component';
 import { EditComponent } from './pages/edit/edit.component';
 
 import { ApiService } from './services/api.service';
+import { ModelModule } from './model/model.module';
 
+
+import {  JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+export function jwtTokenGetter(): string
+{
+  return localStorage.getItem('id_token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +29,21 @@ import { ApiService } from './services/api.service';
     FooterComponent,
     SurveyComponent,
     EditComponent
+  
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModelModule,
+
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: jwtTokenGetter
+      }
+    })
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

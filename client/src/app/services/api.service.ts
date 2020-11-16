@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 // import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { User } from '../model/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const PROTOCOL = 'http';
 const PORT = 3000;
@@ -11,7 +14,9 @@ const PORT = 3000;
 })
 export class ApiService {
 
+  user: User;
   baseUri: string;
+  authToken: string;
 
   private httpOptions =
     {
@@ -22,8 +27,9 @@ export class ApiService {
         })
     };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private jwtService: JwtHelperService) {
     this.baseUri = `${PROTOCOL}://${location.hostname}:${PORT}`;
+    this.user = new User();
   }
 
   // read: get a full list
@@ -56,4 +62,35 @@ export class ApiService {
     return this.http.get(url);
   }
 
+  authenticate(user: User): Observable<any>
+  {
+    const url = `${this.baseUri}/login`;
+    return this.http.post<any>(url,user, this.httpOptions);
+  }
+  storeUserData(token: any, user:User): void
+  {
+    localStorage.setItem('id_token', 'Bearer' +token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.user = user;
+  }
+  loggedIn(): boolean
+  {
+    return !this.jwtService.isTokenExpired(this.authToken);
+  }
+  logout(): Observable<any>
+  {
+    this.authToken = null;
+    this.user = null;
+    localStorage.clear();
+
+    return this.http.get<any>(this.baseUri);
+
+  }
+  private loadToken(): void
+  {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this.authToken);
+  }
 }
