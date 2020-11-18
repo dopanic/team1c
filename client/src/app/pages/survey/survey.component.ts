@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service'; // Express API
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.css']
 })
+
 export class SurveyComponent implements OnInit {
 
   surveys: any = [];
@@ -36,6 +37,11 @@ export class SurveyComponent implements OnInit {
         this.surveys.splice(index, 1);
       });
     }
+  }
+
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
 }

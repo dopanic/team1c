@@ -1,41 +1,58 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <body>
-<div class="container">
+<div class="container" style="width: 800px;">
     <div class="row">
         <div class="container col-8 p-2">
-            <!-- surveys-->
             <div class="btn-group">           
             </div>
-            <h1>&nbsp;&nbsp;&nbsp;&nbsp;Active Surveys</h1>
-            <div *ngFor = 'let survey of surveys; index as i' class=" card m-1 p-1 bg-light" >       
-                <div class="card-body">
+            <a><img id = "projectAd" style="width: 500px;" src = "../../../assets/projectAd.png"></a>
+            <br><br>
+            <div class="center">  
+                <table class="tableBtnSurveys">
+                    <thead>
+                      <tr>
+                        <th>
+                            <a href="survey/add" class="button" role = "button"><span>Create Survey</span></a>            
+                        </th>
+                        <th>
+                            <!-- Smooth scroll to Active survey list -->
+                            <a class="button" (click)="scrollToElement(target)" style="width: 160px; height: 60px;"><span>Active Survey</span></a><div #target></div>            
+                        </th>
+                      </tr>
+                    </thead>
+                    </table>
+            </div>
+            <br><br><br>
+            <br><br><br> 
+            <!-- surveys-->
+            <h1> Active Surveys</h1>
+            <br>            
+            <div *ngFor = 'let survey of surveys; index as i' class="card m-1 p-1 bg-light" >       
+                <div class="card-body" style="height: 13px;">
                     <table class="tg">
                         <thead>
                         <tr>
-                            <th class="text-left col-3">
-                                <h4 class="card-title">
+                            <th class="text-left col-3"  style="top: -10px;">
+                                <h6 class="card-title" >
                                     {{survey.title}}
-                                </h4>
+                                </h6>
                             </th>
-                            <th class="text-center col-3">
+                            <th class="text-center col-3" style="top: -15px;">
                                 <a href="survey/edit/{{survey._id}}" class="btn btn-secondary btn-sm" role = "button">
-                                    <i class="fas fa-edit"></i> Edit
+                                    <i class="fas fa-edit"></i>
                                 </a>
                             </th>
-                            <th class="text-center col-2">
+                            <th class="text-center col-2" style="top: -15px;">
                                 <button class="btn btn-danger btn-sm" role = "button" (click)="removeSurvey(survey, i)">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
                             </th>
                         </tr>
                         </thead>
                         </table>
                 </div>
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="center">  
-            <a href="survey/add" class="button" role = "button"><span>Create Survey</span></a>            
-            </div>
-
+            </div> 
+            <br><br><br>
         </div>
     </div>
 </div>
