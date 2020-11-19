@@ -5,19 +5,13 @@ const surveySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    question1: {
-        type: String,
+    questionsArr: {
+        type: Array,
         required: true
-    },
-    question2: {
-        type: String
-    },
-    question3: {
-        type: String
     }
 },
 {
-    collection: "surveys"
+    collection: "surveys2"
 });
 
 module.exports = mongoose.model('survey', surveySchema);

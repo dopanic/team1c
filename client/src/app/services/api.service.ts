@@ -28,7 +28,7 @@ export class ApiService {
     };
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-    this.baseUri = `${PROTOCOL}://${location.hostname}:${PORT}`;
+    this.baseUri = `${PROTOCOL}://${location.hostname}:${PORT}/api`;
     this.user = new User();
   }
 

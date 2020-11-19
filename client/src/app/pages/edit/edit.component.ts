@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service'; // Express API
 
@@ -10,40 +10,56 @@ import { ApiService } from '../../services/api.service'; // Express API
 })
 export class EditComponent implements OnInit {
 
-  survey: any;
   surveyForm: FormGroup;
-  questions: any;
 
   constructor(
     public fb: FormBuilder,
     private actRoute: ActivatedRoute,
     private apiService: ApiService,
     private router: Router
-  ) {
-    // super(route);
-    this.surveyForm = this.fb.group({
-      title: '',
-      question1: '',
-      question2: '',
-      question3: ''
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
-    // this.title = 'DEFG?';
+    this.surveyForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      questionsArr: this.fb.array([
+          this.initQuestions(),
+      ])
+    });
     const id = this.actRoute.snapshot.paramMap.get('id');
-    this.getSurveyOne(id);
+    if(typeof(id) !== undefined) {
+      this.setSurvey(id);
+    }
   }
 
-  getSurveyOne(id: string): void{
+  setSurvey(id: string): void{
     this.apiService.getSurveyOne(id).subscribe(data => {
+      for (let i = 0; i < data.questionsArr.length - 1; i++) {
+        this.addQuestion();
+      }
       this.surveyForm.setValue({
-        title: data['title'],
-        question1: data['question1'],
-        question2: data['question2'],
-        question3: data['question3']
+        title: data.title,
+        questionsArr: data.questionsArr
       });
     });
+  }
+
+  initQuestions(): FormGroup {
+    return this.fb.group({
+        question: ['', Validators.required]
+    });
+  }
+
+  addQuestion(): void {
+    const control = this.surveyForm.controls.questionsArr as FormArray;
+    control.push(this.initQuestions());
+  }
+
+  removeQuestion(i: number): void {
+    if (window.confirm('Are you sure?')) {
+      const control = this.surveyForm.controls.questionsArr as FormArray;
+      control.removeAt(i);
+    }
   }
 
   onSubmit(): boolean {
