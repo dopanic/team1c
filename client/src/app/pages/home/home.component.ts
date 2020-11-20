@@ -4,11 +4,11 @@ import { ApiService } from '../../services/api.service'; // Express API
 
 @Component({
   selector: 'app-survey',
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 
-export class SurveyComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   surveys: any = [];
 
