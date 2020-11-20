@@ -22,6 +22,7 @@ export class AuthComponent implements OnInit {
     this.user = new User();
     console.log('test');
   }
+  
   authenticate( form : NgForm) : void
   {
     if(form.valid)

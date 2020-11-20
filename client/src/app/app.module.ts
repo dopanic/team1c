@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
 
+import { HomeComponent } from './pages/home/home.component';
 import { SurveyComponent } from './pages/survey/survey.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { LoginComponent } from './pages/login/login.component'; 
@@ -17,8 +18,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { ApiService } from './services/api.service';
 import { ModelModule } from './model/model.module';
 
-
 import {  JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+
 export function jwtTokenGetter(): string
 {
   return localStorage.getItem('id_token');
@@ -29,7 +30,8 @@ export function jwtTokenGetter(): string
     HeaderComponent,
     FooterComponent,
     SurveyComponent,
-    EditComponent
+    EditComponent,
+    HomeComponent
   
   ],
   imports: [

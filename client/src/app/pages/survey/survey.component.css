@@ -1,17 +1,3 @@
-body {
-  padding: 0;
-  background-color: #ffffff;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-h1 {
-  margin-left: 4.7em;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 30px;
-  font-weight: 900;
-}
 
 a {
   font-family: 'Montserrat', sans-serif;
@@ -29,7 +15,6 @@ a {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 7em;
 }
 
 .center {
