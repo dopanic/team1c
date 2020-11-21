@@ -1,6 +1,6 @@
-const Survey = require('./survey.model');
-const Question = require('./question.model');
-const User = require('./user.model');
+const Survey = require('./survey');
+const Question = require('./question');
+const User = require('./user');
 
 module.exports = {
     Survey,
