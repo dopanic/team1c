@@ -97,8 +97,3 @@ module.exports.processRegisterPage = (req, res, next) => {
     });
 }
 
-module.exports.performLogout = (req, res, next) => {
-    req.logout();
-    //res.redirect('/');
-    res.json({success: true, msg: 'User Successfully Logged out!'});
-}
