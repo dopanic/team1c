@@ -229,9 +229,13 @@ module.exports.login = async (req, res, next) => {
         console.log(user);
         const accessToken = await user.generateAuthToken();
 
-        res
-            .header('x-access-token', accessToken)
-            .status(200).send(user);
+
+        return res.json({success: true, msg: 'User Logged in Successfully!', user: {
+               id: user._id,
+               name: user.name,
+               email: user.email
+        }, token: accessToken});        
+            
     }
     catch (e) {
         console.log(e);

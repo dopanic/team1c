@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/survey" style="color: black;">MY SURVEYS </a>
             </li>
             <!-- COULD ADD MORE-->
-            <li *ngIf ='!isLoggedIn()' class="nav-item">
+            <li *ngIf ='isLoggedIn()' class="nav-item">
                 <a (click) = 'onLogoutClick()' routerLink = './logout' class="nav-link" href="/login" style="color: black;">
                     <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a>
             </li>
