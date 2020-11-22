@@ -254,9 +254,7 @@ module.exports.signup = async (req, res, next) => {
         console.log(e);
     }
 }
-module.exports.performLogout = (req, res, next) => {
-    req.logout();
-    //res.redirect('/');
+module.exports.signout = (req, res, next) => {
     res.json({success: true, msg: 'User Successfully Logged out!'});
 }
 
