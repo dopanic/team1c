@@ -37,12 +37,12 @@
                                     {{survey.title}}
                                 </h6>
                             </th>
-                            <th class="text-center col-3" style="top: -15px;">
+                            <th   *ngIf ='isLoggedIn()' class="text-center col-3" style="top: -15px;">
                                 <a href="survey/edit/{{survey._id}}" class="btn btn-secondary btn-sm" role = "button">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </th>
-                            <th class="text-center col-2" style="top: -15px;">
+                            <th  *ngIf ='isLoggedIn()' class="text-center col-2" style="top: -15px;">
                                 <button class="btn btn-danger btn-sm" role = "button" (click)="removeSurvey(survey, i)">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>

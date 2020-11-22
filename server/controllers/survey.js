@@ -259,6 +259,7 @@ module.exports.signup = async (req, res, next) => {
     }
 }
 module.exports.signout = (req, res, next) => {
+    req.logout();
     res.json({success: true, msg: 'User Successfully Logged out!'});
 }
 

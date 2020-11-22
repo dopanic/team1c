@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { AuthComponent } from './auth/auth.component';
 import { AdminComponent} from './admin.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RegComponent } from './reg/reg.component';
 
 
 
@@ -19,6 +20,6 @@ const routing = RouterModule.forChild([
 @NgModule({
     imports: [CommonModule, FormsModule, routing],
     providers: [AuthGuard],
-    declarations: [AuthComponent, AdminComponent]   
+    declarations: [AuthComponent, AdminComponent, RegComponent]   
 })
 export class AdminModule{}

@@ -62,6 +62,11 @@ export class ApiService {
     return this.http.get(url);
   }
 
+  registerUser(user): Observable<any> {
+    const url = `${this.baseUri}/api/users`;
+    return this.http.post(url+'/signup', user);
+  }
+
   authenticate(user: User): Observable<any>
   {
     const url = `${this.baseUri}/api/users/login`;
@@ -84,7 +89,7 @@ export class ApiService {
     this.user = null;
     localStorage.clear();
 
-    return this.http.get<any>(this.baseUri+'/api/users/signout');
+    return this.http.get<any>(this.baseUri+'/api/users/signout', this.httpOptions);
 
   }
   getSurveys(): Observable<any>
