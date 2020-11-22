@@ -4,10 +4,10 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-let cors = require('cors');
+let cors = require('cors'); // to resolve cors error
 
 // dotenv: environment variables
-require('dotenv').config();
+require('dotenv').config(); // to keep some vars safe
 
 // modules for authentication
 let session = require('express-session');
@@ -20,12 +20,13 @@ let flash = require('connect-flash');
 require("./mongoose");
 
 // routers
-// let indexRouter = require('../routes/index');
-// let usersRouter = require('../routes/users');
+const indexRouter = require('../routes/index');
 const apiRouter = require('../routes/api');
 
 // for relative paths
 const { setegid } = require('process');
+
+
 
 let app = express();
 
@@ -36,19 +37,26 @@ app.set('views', path.join(process.cwd(), './server/views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
-// set the apis
+// set pages
+if (process.env.DEPLOY_MODE === 'dev') {
+  app.use('/', indexRouter);
+}
+
+// set apis
 app.use('/api', apiRouter);
 
 // catch all other routes and return the index file
-app.use(express.static(path.join(__dirname, '../../client/dist/team1c')));
-// app.get('*', (req, res) => res.sendFile(path.join(__dirname)));
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../../client/dist/team1c', 'index.html')));
+if (process.env.DEPLOY_MODE !== 'dev') {
+  app.use(express.static(path.join(__dirname, '../../client/dist/team1c')));
+  app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../../client/dist/team1c', 'index.html')));
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
