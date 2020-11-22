@@ -1,12 +1,48 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require('mongoose');
+const express = require('express');
+const app = express();
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
-const { Survey, Question, User } = require('../models/index');
+//Load in mongoose models
+const { Survey, Question, User } = require('./db/models/index');
 
+//Link to mongeDB
+require('./db/mongoose');
 
-// Display a survey list under of user
-module.exports.displayOneSurveyList = async (req, res, next) => {
+//Load middleware
+app.use(bodyParser.json());
+const authenticate = require('./middleware/authMiddleware');
+const { serializeUser, use } = require('passport');
+
+//cors handler
+app.use(function (req, res, next) {
+    //Enabling CORS
+    
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,PATCH,DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization, x-access-token, x-refresh-token, _id");
+    res.header(
+        'Access-Control-Expose-Headers',
+        'x-access-token, x-refresh-token'
+    );
+    res.header(
+        "Access-Control-Allow-Credentials", "true"
+    );
+    next();
+});
+
+/** Routes */
+
+/**
+ * GET/survey
+ s
+ * Purpose: Get all survey
+ s
+ */
+app.get('/surveys', authenticate, async (req, res) => {
+    //Return an array of all the surveys in the db.
     try {
         const surveys = await Survey.find({
             _userId: req.user_id
@@ -16,10 +52,16 @@ module.exports.displayOneSurveyList = async (req, res, next) => {
         res.status(500).send(e);
         console.log(e);
     }
-}
 
-// Create new survey
-module.exports.createSurvey = async (req, res, next) => {
+
+})
+
+/**
+ * POST/survey
+ s
+ * Purpose:Create a survey
+ */
+app.post('/surveys', authenticate, async (req, res) => {
     //Create a new survey and return the new survey back to the user
     try {
         const title = await req.body.title;
@@ -32,11 +74,14 @@ module.exports.createSurvey = async (req, res, next) => {
     } catch (e) {
         res.status(500).send(e);
     }
-}
+})
 
-
-// Update survey
-module.exports.updateSurvey = async (req, res, next) => {
+/**
+ * PATCH/surveys/:id
+ * Purpose: Update a specific survey
+ */
+app.patch('/surveys/:id', authenticate, async (req, res) => {
+    //Update a specific survey
     try {
         const survey = await Survey.findOneAndUpdate({
             _id: req.params.id, _userId: req.user_id
@@ -48,10 +93,13 @@ module.exports.updateSurvey = async (req, res, next) => {
         res.status(500).send(e);
         console.log(e);
     }
-}
+})
 
-// api: delete a survey
-module.exports.deleteSurvey = async (req, res, next) => {
+/**
+ * DELETE/surveys/:id
+ * Purpose: Delete a survey
+ */
+app.delete('/surveys/:id', authenticate, async (req, res) => {
     try {
         //Delete a survey
         console.log(req.params.id);
@@ -68,15 +116,17 @@ module.exports.deleteSurvey = async (req, res, next) => {
         console.log(e);
         res.status(500).send(e);
     }
-}
+})
+
+/**End of survey routes */
 
 
-/**Questions controllers */
+/**user routes */
 
 /**
  * Get all questonss in a survey
  **/
-module.exports.displayQuestions = async (req, res) => {
+app.get('/surveys/:surveyId/questions', authenticate, async (req, res) => {
     try {
         const questions = await Question.find({
             _surveyId: req.params.surveyId
@@ -86,13 +136,13 @@ module.exports.displayQuestions = async (req, res) => {
         res.status(500);
     }
 
-}
+})
 
 /**
  * Get one questonss in a survey
  **/
 
-module.exports.displayOneQuestion = async (req, res) => {
+app.get('/surveys/:surveId/questions/:questionId', async (req, res) => {
     const question = await Question.findOne({
         _id: req.params.questionId,
         _surveyId: req.params.surveyId
@@ -103,20 +153,19 @@ module.exports.displayOneQuestion = async (req, res) => {
         res.status(200).send(question);
     }
 
-}
-
+})
 
 /**
  * create a new question in a specific survey
  **/
-module.exports.createQuestion = async (req, res) => {
+app.post('/surveys/:surveyId/questions', authenticate, async (req, res) => {
     try {
         const survey = await Survey.findOne({
             _id: req.params.surveyId,
             _userId: req.user_id
         });
         if (!survey) {
-            res.staus(404).send("survey not found.");
+            res.staus(404);
         }
         const newQuestion = await new Question({
             number: req.body.number,
@@ -130,14 +179,14 @@ module.exports.createQuestion = async (req, res) => {
     } catch (e) {
         res.status(500);
     }
-}
 
+})
 
 /**
- * update question in a specifc survey
+ * update task in a specifc survey
  **/
 
-module.exports.updateQuestion = async (req, res) => {
+app.patch('/surveys/:surveyId/questions/:questionId', authenticate, async (req, res) => {
     try {
         //Find the survey
         const survey = await Survey.findOne({
@@ -163,13 +212,12 @@ module.exports.updateQuestion = async (req, res) => {
         res.status(500).send(e);
         console.log(e);
     }
-}
-
+})
 
 /**
  * Purpose: Delete a question
  */
-module.exports.deleteQuestion = async (req, res) => {
+app.delete('/surveys/:surveyId/questions/:questionId', authenticate, async (req, res) => {
     try {
         const survey = await Survey.findOne({
             _id: req.params.surveyId,
@@ -191,55 +239,18 @@ module.exports.deleteQuestion = async (req, res) => {
     } catch (e) {
         res.status(500).send(e);
     }
-}
+})
+
+/**End of question routes */
 
 
-/**Survey taker related controllers */
+/**User routes */
 
-//Display all surveys to the survey taker
-module.exports.displayAllSurveyList = async (req, res, next) => {
-    try {
-        const surveys = await Survey.find({});
-        res.status(200).send(surveys);
+/**
+ * Purpose: Sign up
+ */
 
-    } catch (e) {
-        res.status(500).send(e);
-    }
-}
-
-
-// Display one survey with questions to the survey takers
-module.exports.displaySurvey = async (req, res, next) => {
-    try {
-        const survey = Survey.findById(req.params.surveyId);
-        const questions = Question.find({ _surveyId: req.params.surveyId });
-        survey = survey.merge(questions);
-        res.status(200).send(survey);
-    } catch (e) {
-        res.status(500).send(e);
-    }
-}
-
-/**User controllers */
-
-
-module.exports.login = async (req, res, next) => {
-    try {
-        const user = await User.findByCredentials(req.body.email, req.body.password);
-        console.log(user);
-        const accessToken = await user.generateAuthToken();
-
-        res
-            .header('x-access-token', accessToken)
-            .status(200).send(user);
-    }
-    catch (e) {
-        console.log(e);
-        res.status(400).send(e);
-    }
-}
-
-module.exports.signup = async (req, res, next) => {
+app.post('/users/signup', async (req, res) => {
     const newUser = User(req.body);
     try {
         const accessToken = await newUser.generateAuthToken();
@@ -253,12 +264,29 @@ module.exports.signup = async (req, res, next) => {
         res.status(500).send(e);
         console.log(e);
     }
-}
-module.exports.performLogout = (req, res, next) => {
-    req.logout();
-    //res.redirect('/');
-    res.json({success: true, msg: 'User Successfully Logged out!'});
-}
+})
+
+/**
+ * Purpose: Login
+ */
+
+app.post('/users/login', async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password);
+        const accessToken = await user.generateAuthToken();
+        res
+            .header('x-access-token', accessToken)
+            .status(200).send(user);
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+
+})
+
+/**End of user routes */
+
 
 /**Helpers*/
 
@@ -272,3 +300,8 @@ const deleteQuestionsFromSurvey = (_surveyId) => {
         console.log(`Tasks from ${_surveyId} were deleted.`);
     });
 }
+
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server running`);
+})

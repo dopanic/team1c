@@ -44,7 +44,9 @@ router.post('/users/login', surveyController.login);
 //Signup
 router.post('/users/signup', surveyController.signup);
 
+//Signout
 
+router.post('users/signout', surveyController.performLogout);
 /**Survey taking routes */
 
 router.get('/survey/taking/lists', surveyController.displayAllSurveyList);

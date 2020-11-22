@@ -64,7 +64,7 @@ export class ApiService {
 
   authenticate(user: User): Observable<any>
   {
-    const url = `${this.baseUri}/login`;
+    const url = `${this.baseUri}/api/users/login`;
     return this.http.post<any>(url,user, this.httpOptions);
   }
   storeUserData(token: any, user:User): void
@@ -84,7 +84,7 @@ export class ApiService {
     this.user = null;
     localStorage.clear();
 
-    return this.http.get<any>(this.baseUri);
+    return this.http.get<any>(this.baseUri+'/api/users/signout');
 
   }
   getSurveys(): Observable<any>
