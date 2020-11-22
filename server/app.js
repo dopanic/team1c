@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 //Load in mongoose models
-const { Survey, Question, User } = require('./db/models/index');
+const { Survey, Question, User } = require('./models/index');
 
 //Link to mongeDB
 require('./db/mongoose');
@@ -18,7 +18,7 @@ const { serializeUser, use } = require('passport');
 //cors handler
 app.use(function (req, res, next) {
     //Enabling CORS
-    
+
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,PATCH,DELETE");
