@@ -30,6 +30,7 @@ module.exports.createSurvey = async (req, res, next) => {
         await newSurvey.save();
         res.status(200).json(newSurvey);
     } catch (e) {
+        console.log(e);
         res.status(500).send(e);
     }
 }
@@ -85,6 +86,7 @@ module.exports.displayQuestions = async (req, res) => {
         });
         res.status(200).send(questions);
     } catch (e) {
+        console.log(e);
         res.status(500);
     }
 
@@ -102,6 +104,7 @@ module.exports.displayOneQuestion = async (req, res) => {
     if (!question) {
         res.status(404).send("The question does not exist.");
     } else {
+        console.log(e);
         res.status(200).send(question);
     }
 
@@ -130,6 +133,7 @@ module.exports.createQuestion = async (req, res) => {
         await newQuestion.save();
         res.status(200).send(newQuestion);
     } catch (e) {
+        console.log(e);
         res.status(500);
     }
 }
@@ -191,6 +195,7 @@ module.exports.deleteQuestion = async (req, res) => {
             res.status(200).send({ "message": "Question deleted" });
         }
     } catch (e) {
+        console.log(e);
         res.status(500).send(e);
     }
 }
@@ -218,6 +223,7 @@ module.exports.displaySurvey = async (req, res, next) => {
         survey = survey.merge(questions);
         res.status(200).send(survey);
     } catch (e) {
+        console.log(e);
         res.status(500).send(e);
     }
 }
