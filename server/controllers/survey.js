@@ -11,7 +11,7 @@ module.exports.displayOneSurveyList = async (req, res, next) => {
         const surveys = await Survey.find({
             _userId: req.user_id
         });
-        res.status(200).send(surveys);
+        res.status(200).json(surveys);
     } catch (e) {
         res.status(500).send(e);
         console.log(e);
@@ -23,12 +23,12 @@ module.exports.createSurvey = async (req, res, next) => {
     //Create a new survey and return the new survey back to the user
     try {
         const title = await req.body.title;
-        const newsurvey = await new Survey({
+        const newSurvey = await new Survey({
             title,
             _userId: req.user_id
         });
-        await newsurvey.save();
-        res.status(200).send(newsurvey);
+        await newSurvey.save();
+        res.status(200).json(newSurvey);
     } catch (e) {
         res.status(500).send(e);
     }
@@ -43,7 +43,7 @@ module.exports.updateSurvey = async (req, res, next) => {
         }, {
             $set: req.body
         });
-        res.status(200).send({ 'message': 'Updated' });
+        res.status(200).send(survey);
     } catch (e) {
         res.status(500).send(e);
         console.log(e);
@@ -63,7 +63,9 @@ module.exports.deleteSurvey = async (req, res, next) => {
         //Delete questions under this survey
         deleteQuestionsFromSurvey(req.params.id);
 
-        res.status(200).send({ 'message': 'Deleted' });
+        res.status(200).json({
+            msg: survey
+        });
     } catch (e) {
         console.log(e);
         res.status(500).send(e);
@@ -230,12 +232,14 @@ module.exports.login = async (req, res, next) => {
         const accessToken = await user.generateAuthToken();
 
 
-        return res.json({success: true, msg: 'User Logged in Successfully!', user: {
-               id: user._id,
-               name: user.name,
-               email: user.email
-        }, token: accessToken});        
-            
+        return res.json({
+            success: true, msg: 'User Logged in Successfully!', user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }, token: accessToken
+        });
+
     }
     catch (e) {
         console.log(e);
@@ -260,7 +264,7 @@ module.exports.signup = async (req, res, next) => {
 }
 module.exports.signout = (req, res, next) => {
     req.logout();
-    res.json({success: true, msg: 'User Successfully Logged out!'});
+    res.json({ success: true, msg: 'User Successfully Logged out!' });
 }
 
 /**Helpers*/
