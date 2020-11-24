@@ -20,9 +20,9 @@ export class HeaderComponent implements OnInit {
   }
   onLogoutClick(): void
   {
-    this.AuthService.logout().subscribe(data =>{
-      this.router.navigate(['/login']);
-    })
+    this.AuthService.logout();
+    this.router.navigate(['/login']);
+    
   }
   isLoggedIn(): boolean
   {
