@@ -17,18 +17,31 @@ export class SurveyComponent implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
-    // super(route);
     this.getSurveyList();
   }
 
   ngOnInit(): void {
-    // this.title = 'ABCD?';
+
   }
 
   getSurveyList(): void {
     this.apiService.getSurveyList().subscribe(data => {
       this.surveys = data;
+    }, err => {
+      console.log(err);
+    }, () => {
+      this.countResponse();
     });
+  }
+
+  countResponse(): void {
+    for (const survey of this.surveys){
+      this.apiService.getResponseList(survey._id).subscribe(data => {
+        survey.responseCnt = data.length;
+      }, err => {
+        console.log(err);
+      });
+    }
   }
 
   removeSurvey(survey: any, index: number): void {

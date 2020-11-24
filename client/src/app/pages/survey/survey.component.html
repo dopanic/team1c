@@ -14,9 +14,14 @@
                     <table class="tg">
                         <thead>
                         <tr>
+                            <th class="text-center col-3" style="top: -15px;">
+                                <a href="survey/response/{{survey._id}}" class="btn btn-primary btn-sm" role = "button">
+                                    Take
+                                </a>
+                            </th>
                             <th class="text-left col-3"  style="top: -10px;">
                                 <h6 class="card-title" >
-                                    {{survey.title}}
+                                    {{survey.title}} (Responses: {{survey.responseCnt}})
                                 </h6>
                             </th>
                             <th class="text-center col-3" style="top: -15px;">

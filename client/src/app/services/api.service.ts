@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { User } from '../model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { data } from 'jquery';
 
 const PROTOCOL = 'http';
 const PORT = 3000;
@@ -61,6 +62,23 @@ export class ApiService {
     const url = `${this.baseUri}/survey/del/${id}`;
     return this.http.get(url);
   }
+
+  // response apis
+  // add a response
+  createResponse(data): Observable<any> {
+    const url = `${this.baseUri}/response/add`;
+    return this.http.post(url, data);
+  }
+
+  // get a list of a specific survey
+  getResponseList(id: string): Observable<any> {
+    const url = `${this.baseUri}/response/list/${id}`;
+    return this.http.get(url);
+  }
+
+
+
+
 
   authenticate(user: User): Observable<any>
   {

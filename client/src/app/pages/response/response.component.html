@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-9 p-2">
+            <!-- form-->
+            <h1> Survey</h1>
+            <form [formGroup]="responseForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <input type="text" formControlName="title" readonly>
+                </div>
+
+                <div formArrayName="answersArr">
+                    <div *ngFor="let address of responseForm.get('answersArr')['controls']; let i=index">
+                        <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                        <div [formGroupName]="i">
+                            <!-- question -->
+                            <div>
+                                <label>Question {{i + 1}}</label>
+                                <input type="text" formControlName="question" readonly>
+                                <label>Answer {{i + 1}}</label>
+                                <input type="text" formControlName="answer">
+                                <!--display error message if street is not valid-->
+                                <small [hidden]="responseForm.get('answersArr')['controls'][i].controls.answer.valid">
+                                    Answer is required
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="!responseForm.valid">Submit</button>
+                <a href="/survey" type="submit" class="btn btn-danger">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
