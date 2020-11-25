@@ -237,7 +237,6 @@ module.exports.login = async (req, res, next) => {
         console.log(user);
         const accessToken = await user.generateAuthToken();
 
-
         return res.json({
             success: true, msg: 'User Logged in Successfully!', user: {
                 id: user._id,
@@ -255,18 +254,24 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.signup = async (req, res, next) => {
     const newUser = User(req.body);
-    try {
-        const accessToken = await newUser.generateAuthToken();
-        // return { accessToken, refreshToken };
-        await newUser.save();
-        res
-            .header('x-access-token', accessToken)
-            .status(200).send(newUser);
+    const existedUser = User.findOne({ email: newUser.emeil });
+    if (existedUser) {
+        res.status(404).json({ msg: 'User exists in the system.' });
+    } else {
+        try {
+            const accessToken = await newUser.generateAuthToken();
 
-    } catch (e) {
-        res.status(500).send(e);
-        console.log(e);
+            await newUser.save();
+            res
+                .header('x-access-token', accessToken)
+                .status(200).send(newUser);
+
+        } catch (e) {
+            res.status(500).send(e);
+            console.log(e);
+        }
     }
+
 }
 module.exports.signout = (req, res, next) => {
     req.logout();
