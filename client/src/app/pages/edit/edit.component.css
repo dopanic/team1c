@@ -1,0 +1,102 @@
+h1{
+    margin-left: 8.5em;
+    margin-bottom: 1em;
+    margin-top: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+
+body{
+    margin-bottom: 100px;
+}
+
+span{
+    font-family: 'Montserrat', sans-serif;
+}
+
+label{
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 2em;
+}
+
+/* Boxes */
+
+.container{
+    background-color: #f5f5f5c0;
+    width:60em;
+    margin-top: 3em;
+}
+
+.boxTitle{
+    background-color: #ffffffbd;
+    width: 30%;
+    margin-top: 70px;
+    margin-left: 15em;
+}
+
+.boxQuestion{
+    background-color: rgb(255, 255, 255);
+    width: 10em;
+
+}
+
+.box{
+    margin-left: 5em;
+}
+
+/* input text */
+
+.surveyForm input[type = "text"]:focus{
+    width: 280px;
+    border-color: rgb(187, 29, 29);
+}
+
+.box input[type = "text"]{
+    border: 0;
+    background: white;
+    margin: 10px 30px;
+    border: 2px solid rgb(211, 211, 211);
+    padding: 5px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+small{
+    margin-left: 5.5em;
+    color: red;
+}
+
+
+/* Button */
+
+/* Add Button */
+.addBtn{
+    margin-left: 4.2em;
+    width: 18.7em;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: medium;
+    border-radius: 5px;
+    height: 2.5em;
+}
+
+/* SAVE Button */
+.box button[type = "submit"]{
+    margin-top: 8px;
+    margin-bottom: 20px;
+    margin-left: 8em;
+    color: black;
+}
+
+/* CANCEL Button */
+.box button[type = "cancel"]{
+    margin-top: 8px;
+    margin-bottom: 20px;
+    margin-left: 2em;
+}
+
+/* Gap */
+
+.gap{
+    margin: 1.5em;
+}
