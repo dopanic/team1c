@@ -254,7 +254,7 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.signup = async (req, res, next) => {
     const newUser = User(req.body);
-    const existedUser = User.findOne({ email: newUser.emeil });
+    const existedUser = await User.findOne({ email: newUser.emeil });
     if (existedUser) {
         res.status(404).json({ msg: 'User exists in the system.' });
     } else {
