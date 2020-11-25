@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+        unique: true
     },
     password: {
         type: String,
@@ -40,6 +41,15 @@ UserSchema.methods.generateAuthToken = function () {
     })
 }
 
+//Check if user exists in the db
+UserSchema.methods.checkUserExist = async function () {
+    user = this;
+    ExistedUser = await User.findOne({ email: this.email });
+    if (ExistedUser) {
+        throw new Error("User exsits in the system.");
+    }
+}
+
 
 /**static methods */
 
@@ -62,6 +72,7 @@ UserSchema.statics.findByCredentials = async function (email, password) {
     }
 
 }
+
 
 
 /**middlewares */

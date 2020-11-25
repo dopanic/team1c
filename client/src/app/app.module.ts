@@ -13,7 +13,7 @@ import { FooterComponent } from './partials/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SurveyComponent } from './pages/survey/survey.component';
 import { EditComponent } from './pages/edit/edit.component';
-import { LoginComponent } from './pages/login/login.component'; 
+
 
 import { ApiService } from './services/api.service';
 import { ModelModule } from './model/model.module';

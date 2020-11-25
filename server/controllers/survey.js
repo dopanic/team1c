@@ -234,9 +234,7 @@ module.exports.displaySurvey = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
-        console.log(user);
         const accessToken = await user.generateAuthToken();
-
         return res.json({
             success: true, msg: 'User Logged in Successfully!', user: {
                 id: user._id,
@@ -248,31 +246,33 @@ module.exports.login = async (req, res, next) => {
     }
     catch (e) {
         console.log(e);
-        res.status(400).send(e);
+        return res.json({ success: false })
     }
 }
 
 module.exports.signup = async (req, res, next) => {
-    const newUser = User(req.body);
-    const existedUser = await User.findOne({ email: newUser.emeil });
-    if (existedUser) {
-        res.status(404).json({ msg: 'User exists in the system.' });
-    } else {
-        try {
-            const accessToken = await newUser.generateAuthToken();
+    const user = await User(req.body);
+    try {
+        await user.checkUserExist();
 
-            await newUser.save();
-            res
-                .header('x-access-token', accessToken)
-                .status(200).send(newUser);
+        const accessToken = await user.generateAuthToken();
+        await user.save();
 
-        } catch (e) {
-            res.status(500).send(e);
-            console.log(e);
-        }
+        return res.json({
+            success: true, msg: 'User created Successfully!', user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }, token: accessToken
+        });
+
+    } catch (e) {
+
+        return res.json({ success: false })
     }
-
 }
+
+
 
 
 /**Helpers*/

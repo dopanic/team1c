@@ -29,7 +29,7 @@ export class AuthService
     {
         return this.datasource.loggedIn();
     }
-    logout(): Observable<any>
+    logout(): void
     {
         return this.datasource.logout();
     }
