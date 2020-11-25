@@ -28,11 +28,15 @@ export class RegComponent implements OnInit {
         if(data.success)
         {
           this.auth.storeUserData(data.token, data.user);
-          this.router.navigateByUrl('admin/main');
+          this.router.navigateByUrl('register');
+        }
+        else
+        {
+          this.errorMessage = 'Could Not Register';
         }
       });
 
-      this.router.navigateByUrl("admin/main");
+      this.router.navigateByUrl("survey");
     }
     else
     {

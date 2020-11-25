@@ -25,14 +25,20 @@ export class AuthComponent implements OnInit {
   
   authenticate( form : NgForm) : void
   {
+    
     if(form.valid)
     {
       // perform authentication
       this.auth.authenticate(this.user).subscribe(data =>{
         if(data.success)
         {
+          
           this.auth.storeUserData(data.token, data.user);
           this.router.navigateByUrl('/survey');
+        }
+        else
+        {
+          this.errorMessage = 'Invalid user/password';
         }
       });
 

@@ -249,27 +249,34 @@ module.exports.login = async (req, res, next) => {
     }
     catch (e) {
         console.log(e);
-        res.status(400).send(e);
+        return res.json({success:false})
     }
 }
 
 module.exports.signup = async (req, res, next) => {
     const newUser = User(req.body);
-    const existedUser = User.findOne({ email: newUser.emeil });
-    if (existedUser) {
-        res.status(404).json({ msg: 'User exists in the system.' });
+    
+    const newEmail = User(req.body.email);
+    const existedUser = User.findOne({ email: newUser.email });
+    if (existedUser == newEmail) {
+        return res.json({ success:false });
     } else {
         try {
             const accessToken = await newUser.generateAuthToken();
 
             await newUser.save();
-            res
-                .header('x-access-token', accessToken)
-                .status(200).send(newUser);
+            return res.json({
+                success: true, msg: 'User created Successfully!', user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email
+                }, token: accessToken
+            });
 
         } catch (e) {
-            res.status(500).send(e);
-            console.log(e);
+            return res.json({
+                success: false
+            });
         }
     }
 
