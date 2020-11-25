@@ -255,11 +255,11 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.signup = async (req, res, next) => {
     const newUser = User(req.body);
-    
-    const newEmail = User(req.body.email);
-    const existedUser = User.findOne({ email: newUser.email });
-    if (existedUser == newEmail) {
-        return res.json({ success:false });
+    try{
+        const existedUser = User.findOne({ email: newUser.email });
+            if (existedUser === newUser.email) {
+                console.log(existedUser);
+                return res.json({ success:false });
     } else {
         try {
             const accessToken = await newUser.generateAuthToken();
@@ -274,11 +274,20 @@ module.exports.signup = async (req, res, next) => {
             });
 
         } catch (e) {
+            console.log(e);
             return res.json({
                 success: false
             });
         }
     }
+    } catch (e)
+    {
+        console.log(e);
+        return res.json({
+            success: false
+        });
+    }
+
 
 }
 

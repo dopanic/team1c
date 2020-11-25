@@ -28,7 +28,8 @@ export class RegComponent implements OnInit {
         if(data.success)
         {
           this.auth.storeUserData(data.token, data.user);
-          this.router.navigateByUrl('register');
+          this.router.navigateByUrl('survey');
+          alert("Registeration Succesful");
         }
         else
         {
@@ -36,7 +37,7 @@ export class RegComponent implements OnInit {
         }
       });
 
-      this.router.navigateByUrl("survey");
+      
     }
     else
     {
