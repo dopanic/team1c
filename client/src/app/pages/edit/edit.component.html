@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <body>
+<p style="margin: 5em;"></p>
 <div class="container">
     <div class="row">
         <div class="col-9 p-2">
@@ -42,7 +43,7 @@
                                                 <th>
                                                     <div>
                                                         <!-- Delete Question Button -->
-                                                        <span *ngIf="surveyForm.get('questionsArr')['controls'].length > 1" 
+                                                        <span *ngIf="surveyForm.get('questionsArr')['controls'].length > 1" style="cursor: pointer;" 
                                                         (click)="removeQuestion(i)"> <em class="fas fa-minus-circle fa-lg" style="color: red"></em>
                                                         <p class="gap"></p>    
                                                         </span>
@@ -77,4 +78,3 @@
             </div>
         </div>
 </body>
-

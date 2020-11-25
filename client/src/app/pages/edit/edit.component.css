@@ -72,12 +72,14 @@ small{
 /* Add Button */
 .addBtn{
     margin-left: 4.2em;
+    margin-top: 2em;
     width: 18.7em;
     outline: none;
     font-family: 'Montserrat', sans-serif;
     font-size: medium;
     border-radius: 5px;
     height: 2.5em;
+
 }
 
 /* SAVE Button */
@@ -99,4 +101,8 @@ small{
 
 .gap{
     margin: 1.5em;
+}
+
+.gapFifth{
+    margin: 5em;
 }
