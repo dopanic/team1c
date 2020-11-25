@@ -1,46 +1,80 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<body>
+<p style="margin: 5em;"></p>
 <div class="container">
     <div class="row">
         <div class="col-9 p-2">
             <!-- form-->
-            <h1> Survey</h1>
-            <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
-
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" formControlName="title">
-                    <small *ngIf="!surveyForm.controls.title.valid" class="text-danger">
-                        Title is required (minimum 5 characters).
-                    </small>
-                </div>
-
-                <div formArrayName="questionsArr">
-                    <div *ngFor="let address of surveyForm.get('questionsArr')['controls']; let i=index">
-                        <!-- question header -->
-                        <div>
-                            <span>Question {{i + 1}}</span>
-                            <span *ngIf="surveyForm.get('questionsArr')['controls'].length > 1" 
-                                (click)="removeQuestion(i)"> remove
-                            </span>
+            <h1> Create Survey</h1>
+            <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" class="box">
+                <table class="tableCreateSurvey">
+                    <thead>
+                    <tr>
+                      <th class="boxTitle">
+                        <div class="form-group">
+                           <input type="text" formControlName="title" placeholder=" Title">
+                            <!-- Text Require message -->
+                           <small *ngIf="!surveyForm.controls.title.valid" class="text-danger">
+                           Title is required (minimum 5 characters).
+                           </small>
                         </div>
-                        <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
-                        <div [formGroupName]="i">
-                            <!-- question -->
-                            <div>
-                                <label>Question</label>
-                                <input type="text" formControlName="question">
-                                <!--display error message if street is not valid-->
-                                <small [hidden]="surveyForm.get('questionsArr')['controls'][i].controls.question.valid">
+                      </th>
+                      <p class="gap"></p>
+                      <th class="boxQuestion" style="overflow:auto;">
+                        <div formArrayName="questionsArr">
+                        <p class="gap"></p>
+                            <div *ngFor="let address of surveyForm.get('questionsArr')['controls']; let i=index">
+                                <!-- question header -->
+                                <table>
+                                        <thead>
+                                            <tr><p style="margin: 5px;"></p>
+                                                <th>
+                                                    <!-- Number of Question -->
+                                                    <span> Q{{i + 1}}. </span>
+                                                </th>
+                                                <th>
+                                                    <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->                                                                                                            
+                                                    <div [formGroupName]="i">
+                                                        <div>
+                                                            <input type="text" formControlName="question" placeholder=" Enter a question">
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div>
+                                                        <!-- Delete Question Button -->
+                                                        <span *ngIf="surveyForm.get('questionsArr')['controls'].length > 1" style="cursor: pointer;" 
+                                                        (click)="removeQuestion(i)"> <em class="fas fa-minus-circle fa-lg" style="color: red"></em>
+                                                        <p class="gap"></p>    
+                                                        </span>
+                                                        <p style="margin: 10px;"></p>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                <!-- Text Require message -->
+                                    <small [hidden]="surveyForm.get('questionsArr')['controls'][i].controls.question.valid" >
                                     Question is required
-                                </small>
+                                    </small>
                             </div>
                         </div>
-                    </div>
+                            <!-- Add Question Button -->
+                            <button (click)="addQuestion()" class="addBtn">
+                                <i class="fas fa-plus-circle"></i> Add a question</button>
+                            <hr>
+                            <p></p>
+                            <!-- Save Button -->
+                            <button type="submit" class="btn btn-warning" [disabled]="!surveyForm.valid">SAVE</button>
+                            <!-- Cancel Button -->
+                            <button href="/survey" type="cancel" class="btn btn-secondary">CANCEL</button>
+                        </th>
+                     </tr>
+                            </thead>
+                        </table>
+                        <p class="gap"></p>
+                    </form>
                 </div>
-
-                <span (click)="addQuestion()"> add </span>
-                <button type="submit" class="btn btn-primary" [disabled]="!surveyForm.valid">Submit</button>
-                <a href="/survey" type="submit" class="btn btn-danger">Cancel</a>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
+</body>

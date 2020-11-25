@@ -15,6 +15,11 @@ body {
   a {
     font-family: 'Montserrat', sans-serif;
   }
+
+  .waveBG{
+    background-color: #9b1515;
+    /* width: 200em; */
+  }
   
   .card-title {
     display: block;
