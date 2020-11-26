@@ -6,8 +6,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { User } from '../model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const PROTOCOL = 'http';
-const PORT = 3000;
+const PROTOCOL = 'https';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +27,7 @@ export class ApiService {
     };
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-    this.baseUri = `${PROTOCOL}://${location.hostname}:${PORT}/api`;
+    this.baseUri = `${PROTOCOL}://${location.hostname}/api`;
     this.user = new User();
   }
 
@@ -60,20 +59,20 @@ export class ApiService {
   removeSurvey(id): Observable<any> {
     if(this.loggedIn)
     {
-      const url = `${this.baseUri}/api/survey/del/${id}`;
+      const url = `${this.baseUri}/survey/del/${id}`;
       return this.http.get(url);
     }
   }
 
   registerUser(user): Observable<any> {
-    const url = `${this.baseUri}/api/users`;
-    return this.http.post(url+'/signup', user);
+    const url = `${this.baseUri}/users/signup`;
+    return this.http.post(url, user);
   }
 
   authenticate(user: User): Observable<any>
   {
-    const url = `${this.baseUri}/api/users/login`;
-    return this.http.post<any>(url,user, this.httpOptions);
+    const url = `${this.baseUri}/users/login`;
+    return this.http.post<any>(url, user, this.httpOptions);
   }
   storeUserData(token: any, user:User): void
   {
@@ -96,7 +95,7 @@ export class ApiService {
   getSurveys(): Observable<any>
   {
     this.loadToken();
-    return this.http.get<any>(this.baseUri+'surveys');
+    return this.http.get<any>(this.baseUri + 'surveys');
   }
   private loadToken(): void
   {
