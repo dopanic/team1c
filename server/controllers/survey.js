@@ -45,25 +45,16 @@ module.exports.updateSurvey = (req, res, next)=>{
 }
 
 // api: delete a survey
-module.exports.deleteSurvey = async (req, res, next) => {
-    try {
-        //Delete a survey
-        console.log(req.params.id);
-        const survey = await Survey.findByIdAndRemove({
-            _id: req.params.id,
-            _userId: req.user_id
-        });
-
-        //Delete questions under this survey
-        deleteQuestionsFromSurvey(req.params.id);
-
-        res.status(200).json({
-            msg: survey
-        });
-    } catch (e) {
-        console.log(e);
-        res.status(500).send(e);
-    }
+module.exports.deleteSurvey = (req, res, next)=>{
+    Survey.findByIdAndRemove(req.params.id, (err, deletedSurvey) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.status(200).json({
+                msg: deletedSurvey
+            })
+        }
+    })
 }
 
 // api: display one survey
