@@ -18,7 +18,7 @@ router.post('/survey/add',  surveyController.createSurvey);
 router.patch('/survey/edit/:id',  surveyController.updateSurvey);
 
 // api: delete a survey
-router.delete('/survey/del/:id', surveyController.deleteSurvey);
+router.get('/survey/del/:id', surveyController.deleteSurvey);
 
 // temporary
 router.get('/survey/view/:id', surveyController.viewSurvey);
