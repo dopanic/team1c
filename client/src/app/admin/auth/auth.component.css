@@ -1,4 +1,11 @@
-
+body{
+    background-image: url("../../../assets/loginBg3.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 80vh;
+  }
+  
 h1{
     margin-bottom: 1em;
     font-family: 'Montserrat', sans-serif;
@@ -15,20 +22,19 @@ input{
 }
 
 fieldset{
-    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 /* login box effect */
 
 .box{
     width: 380px;
-    padding: 40px;
     position: relative;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%,5%);
     background: #f8f8f8;
     text-align: center;
+    height: 500px;
 }
 
 .box input[type = "text"], .box input[type= "password"]{

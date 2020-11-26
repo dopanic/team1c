@@ -1,3 +1,11 @@
+body{
+  background-image: url("../../../assets/loginBg2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 75vh;
+}
+
 h1{
   text-align: center;
 }
@@ -18,8 +26,10 @@ a {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  background-color: #f5f5f5c0;
+  background-color: #f5f5f581;
+  transform: translate(0,-10%);
   width:55em;
+
 }
 
 .center {

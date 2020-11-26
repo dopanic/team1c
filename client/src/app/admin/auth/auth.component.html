@@ -1,37 +1,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-<div class="container-fluid">
-            <main class="container" >
-                <div class="col-mil-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
-                    <div class="bg-danger mt-2 p-2 text-center text-white"
-                        *ngIf = 'errorMessage != null'> 
-                        {{errorMessage}}
-                    </div>
-                    <div data-ng-bind-html="item"></div>
-                    <form class="box" autocomplete="off" #form = 'ngForm'
-                    (ngSubmit) = 'authenticate(form)'>
-                    <h1>Login</h1>
-                    <fieldset class="form-group">
-                        <input type="text" class="form-control"
-                        [(ngModel)]='user.name'
-                        name='name' placeholder='Username'
-                        id='name' required autofocus autocomplete='off'>
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <input type="password" class="form-control"
-                        [(ngModel)]='user.password'
-                        name='password' placeholder='Password'
-                        id='password' required  autocomplete='off'>
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                      <button class= "btn btn-primary m-1" type='submit'>
-                        login
-                        </button>  
-                    </fieldset>   
-                    <a href="/home">Sign up</a>          
-                </form>
+<body>
+    <div class="container-fluid">
+        <main class="container" >
+            <div class="col-mil-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
+                <div class="bg-danger mt-2 p-2 text-center text-white"
+                    *ngIf = 'errorMessage != null'> 
+                    {{errorMessage}}
                 </div>
-            </main>
-        </div>
+                <div data-ng-bind-html="item"></div>
+                <form class="box" autocomplete="off" #form = 'ngForm'
+                (ngSubmit) = 'authenticate(form)'>
+                <h1>Login</h1>
+                <fieldset class="form-group">
+                    <input type="text" class="form-control"
+                    [(ngModel)]='user.name'
+                    name='name' placeholder='Username'
+                    id='name' required autofocus autocomplete='off'>
+                </fieldset>
 
+                <fieldset class="form-group">
+                    <input type="password" class="form-control"
+                    [(ngModel)]='user.password'
+                    name='password' placeholder='Password'
+                    id='password' required  autocomplete='off'>
+                </fieldset>
+
+                <fieldset class="form-group">
+                  <button class= "btn btn-primary m-1" type='submit'>
+                    login
+                    </button>  
+                </fieldset>   
+                <a href="/home">Sign up</a>          
+            </form>
+            </div>
+        </main>
+    </div>
+</body>
