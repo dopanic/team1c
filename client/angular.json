@@ -150,6 +150,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "team1c"
+    }
+  },
+  "defaultProject": "team1c",
+  "cli": {
+    "analytics": false
+  }
 }

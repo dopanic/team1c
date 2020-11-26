@@ -6,7 +6,25 @@
         <div class="container col-8 p-2">
             <div class="btn-group">           
             </div>
+            <a><img id = "projectAd" style="width: 500px;" src = "../../../assets/projectAd.png"></a>
             <br><br>
+            <div class="center">  
+                <table class="tableBtnSurveys">
+                    <thead>
+                      <tr>
+                        <th>
+                            <a href="survey/add" class="button" role = "button"><span>Create Survey</span></a>            
+                        </th>
+                        <th>
+                            <!-- Smooth scroll to Active survey list -->
+                            <a class="button" (click)="scrollToElement(target)" style="width: 160px; height: 60px;"><span>Active Survey</span></a><div #target></div>            
+                        </th>
+                      </tr>
+                    </thead>
+                    </table>
+            </div>
+            <br><br><br>
+            <br><br><br> 
             <!-- surveys-->
             <h1> Active Surveys</h1>
             <br>            

@@ -1,69 +1,100 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
+const { nextTick } = require('process');
+const { resolve } = require('path');
 
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Please enter a user name'],
-        unique: true
+require('dotenv').config();
 
-    },
-    phoneNum:{
-        type:String,
-        required:[true,'Please enter a phone number']
-    },
+const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: [true, 'Please enter an email.'],
-        unique: true,
-        lowercase: true,
-        validate: [validator.isEmail, 'Please enter an valid email.']
+        required: true,
+        trim: true,
+        unique: true
     },
     password: {
         type: String,
-        required: [true, 'Please enter an password.'],
-        minlength: [6, 'Minium password length is 6.']
+        required: true
+
     },
-    surveys:{
-        type:Array,
-        items:{
-            type:String
-        }
+    name: {
+        type: String
+    },
+    number: {
+        type: String
     }
-})
+});
 
-userSchema.methods.generateAuthToken = async function () {
+UserSchema.methods.generateAuthToken = function () {
     const user = this;
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.TOKEN_SECRET, {
-        expiresIn: '24h'
-    });
-
-
-    return token;
+    return new Promise((resolve, reject) => {
+        //Create jwt and return it
+        jwt.sign({ _id: user._id.toHexString() }, process.env.TOKEN_SECRET, { expiresIn: '100d' }, (err, token) => {
+            if (!err) {
+                resolve(token);
+            } else {
+                reject();
+            }
+        });
+    })
 }
 
-userSchema.statics.login = async function (email, password) {
-    const user = await User.findOne({ email });
+//Check if user exists in the db
+UserSchema.methods.checkUserExist = async function () {
+    user = this;
+    ExistedUser = await User.findOne({ email: this.email });
+    if (ExistedUser) {
+        throw new Error("User exsits in the system.");
+    }
+}
+
+
+/**static methods */
+
+/**
+ * find user by email and password
+ */
+UserSchema.statics.findByCredentials = async function (email, password) {
+
+    user = await User.findOne({ email });
     if (!user) {
-        throw new Error('User does not exist');
+        throw new Error("Uable to login");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
+
+    if (!isMatch) {
+        throw new Error("Uable to login");
+    } else {
         return user;
     }
-    throw new Error('Incorrect Password ');
 
 }
 
-userSchema.pre('save', async function (next) {
-    this.password = await bcrypt.hash(this.password, 8);
 
-    next();
+
+/**middlewares */
+
+/**
+ * Hash and salt the password before save.
+ * This function will only apply when password first initialized or just changed.
+ */
+UserSchema.pre('save', function (next) {
+    const user = this;
+    if (user.isModified('password')) {
+        bcrypt.genSalt(8, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                user.password = hash;
+                next();
+            })
+        })
+    } else {
+        next();
+    }
 })
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model('user', UserSchema);
 
 module.exports = User;

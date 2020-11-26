@@ -58,13 +58,21 @@ export class ApiService {
 
   // delete: delete a survey
   removeSurvey(id): Observable<any> {
-    const url = `${this.baseUri}/survey/del/${id}`;
-    return this.http.get(url);
+    if(this.loggedIn)
+    {
+      const url = `${this.baseUri}/api/survey/del/${id}`;
+      return this.http.get(url);
+    }
+  }
+
+  registerUser(user): Observable<any> {
+    const url = `${this.baseUri}/api/users`;
+    return this.http.post(url+'/signup', user);
   }
 
   authenticate(user: User): Observable<any>
   {
-    const url = `${this.baseUri}/login`;
+    const url = `${this.baseUri}/api/users/login`;
     return this.http.post<any>(url,user, this.httpOptions);
   }
   storeUserData(token: any, user:User): void
@@ -78,13 +86,11 @@ export class ApiService {
   {
     return !this.jwtService.isTokenExpired(this.authToken);
   }
-  logout(): Observable<any>
+  logout(): void
   {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
-
-    return this.http.get<any>(this.baseUri);
 
   }
   getSurveys(): Observable<any>

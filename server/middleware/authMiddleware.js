@@ -1,43 +1,19 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
 
-const requireAuth = (req, res, next) => {
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
-            if (err) {
-                console.log(err.message);
-                return res.redirect('/login');
-            } else {
-                next();
-            }
-        })
-    } else {
-        return res.redirect('/login');
-    }
+require('dotenv').config();
 
+const authenticate = (req, res, next) => {
+    const token = req.header('x-access-token');
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            //jwt is invalid
+            res.status(401).send(err);
+        } else {
+            req.user_id = decoded._id;
+            next();
+        }
+    })
 }
 
-const checkUser = (req, res, next) => {
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-            if (err) {
-                console.log(err.message);
-                res.locals.user = null;
-                console.log(err);
-                next();
-            } else {
-                const user = await User.findById(decodedToken._id);
-                res.locals.user = user;
-                console.log(user);
-                console.log(decodedToken);
-                next();
-            }
-        })
-    } else {
-        res.locals.user = null;
-        next();
-    }
-}
-module.exports = { requireAuth, checkUser };
+module.exports = authenticate;
