@@ -20,6 +20,9 @@ router.patch('/survey/edit/:id',  surveyController.updateSurvey);
 // api: delete a survey
 router.delete('/survey/del/:id', surveyController.deleteSurvey);
 
+// temporary
+router.get('/survey/view/:id', surveyController.viewSurvey);
+
 //Display a question in a specific survey
 router.get('/survey/:surveyId/questions/:questionId', surveyController.displayOneQuestion);
 

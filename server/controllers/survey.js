@@ -18,37 +18,30 @@ module.exports.displayOneSurveyList = async (req, res, next) => {
     }
 }
 
-// Create new survey
-module.exports.createSurvey = async (req, res, next) => {
-    //Create a new survey and return the new survey back to the user
-    try {
-        const title = await req.body.title;
-        const newSurvey = await new Survey({
-            title,
-            _userId: req.user_id
-        });
-        await newSurvey.save();
-        res.status(200).json(newSurvey);
-    } catch (e) {
-        console.log(e);
-        res.status(500).send(e);
-    }
+// api: add new survey
+module.exports.createSurvey = (req, res, next)=>{
+    Survey.create(req.body, (err, newSurvey) =>{
+        if(err) {
+            return console.error(err);
+        } else {
+            res.json(newSurvey);
+        }
+    });
 }
 
 
 // Update survey
-module.exports.updateSurvey = async (req, res, next) => {
-    try {
-        const survey = await Survey.findOneAndUpdate({
-            _id: req.params.id, _userId: req.user_id
-        }, {
-            $set: req.body
-        });
-        res.status(200).send(survey);
-    } catch (e) {
-        res.status(500).send(e);
-        console.log(e);
-    }
+module.exports.updateSurvey = (req, res, next)=>{
+    Survey.findByIdAndUpdate(req.params.id,{
+        $set: req.body
+    }, (err, editedSurvey) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.json(editedSurvey);
+            console.log('The edited survey updated successfully');
+        }
+    })
 }
 
 // api: delete a survey
@@ -73,6 +66,16 @@ module.exports.deleteSurvey = async (req, res, next) => {
     }
 }
 
+// api: display one survey
+module.exports.viewSurvey = (req, res, next)=>{
+    Survey.findById(req.params.id, (err, targetSurvey) => {
+        if(err) {
+            return console.error(err);
+        } else {
+            res.json(targetSurvey);
+        }
+    })
+}
 
 /**Questions controllers */
 
