@@ -1,0 +1,98 @@
+h6{
+  margin-bottom: 20px ;
+  text-transform: uppercase;
+}
+
+.footer
+{
+  background-color:#18181a;
+  padding:40px 0 5px;
+  font-size:15px;
+  line-height:24px;
+  color:#737373;
+}
+
+.footer hr
+{
+  border-top-color:rgb(255, 197, 6);
+  opacity: 0.5;
+}
+
+.footer h6
+{
+  color:white;
+  font-size:15px;
+  letter-spacing:3px
+}
+
+.footer a
+{
+  color:#6d6d6d;
+}
+
+.footer a:hover
+{
+  color:#e7bc2f;
+  text-decoration:none;
+}
+
+.contents-list li{
+  margin-left: -3em;
+  margin-bottom: 1em;
+  list-style-type: none;
+}
+
+/* profile icons */
+
+.footer .programmers a
+{
+  background-color:#33353d;
+  border-radius:100%;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  width:40px;
+}
+
+.programmers
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+} 
+
+.programmers li
+{
+  display:inline-block;
+  margin-bottom:5px
+}
+
+.programmers a{
+  display:inline-block;
+  text-align:center;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+
+.programmers a.user1:hover
+{
+  background-color:#ea4c4c
+}
+
+.programmers a.user2:hover
+{
+  background-color:#308ef8
+}
+
+.programmers a.user3:hover
+{
+  background-color:#643eec
+}
+
+.programmers a.user4:hover
+{
+  background-color:#ffca3a
+}
