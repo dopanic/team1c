@@ -80,20 +80,27 @@ h6{
 
 .programmers a.user1:hover
 {
-  background-color:#ea4c4c
+  /* background-color:#ea4c4c */
+  background: url("../../../assets/John.png") no-repeat;
+
 }
 
 .programmers a.user2:hover
 {
-  background-color:#308ef8
+  /* background-color:#308ef8 */
+  background: url("../../../assets/Jonny.png") no-repeat;
+
 }
 
 .programmers a.user3:hover
 {
-  background-color:#643eec
+  /* background-color:#643eec */
+  background: url("../../../assets/Seyeong.png") no-repeat;
+
 }
 
 .programmers a.user4:hover
 {
-  background-color:#ffca3a
+  /* background-color:#ffca3a */
+  background: url("../../../assets/Tony.png") no-repeat;
 }
