@@ -1,9 +1,7 @@
 body{
-    background-image: url("../../../assets/loginBg3.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 80vh;
   }
   
 h1{
@@ -35,6 +33,7 @@ fieldset{
     background: #f8f8f8;
     text-align: center;
     height: 500px;
+    box-shadow: 10px 10px 15px 2px rgba(204, 204, 204, 0.527);  
 }
 
 .box input[type = "text"], .box input[type= "password"]{
