@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service'; // Express API
+import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-edit',
@@ -73,6 +75,7 @@ export class EditComponent implements OnInit {
           .subscribe(res => {
             this.router.navigateByUrl('/survey');
             console.log('Updated successfully.');
+            swal("Nice!", "Updated Successfully ! ", "success");
           }, (err) => {
             console.log(err);
           });
@@ -81,6 +84,7 @@ export class EditComponent implements OnInit {
           .subscribe(res => {
               this.router.navigateByUrl('/survey');
               console.log('Created successfully.');
+              swal("Good job!", "Now your survey is ready !", "success");
             }, (err) => {
               console.log(err);
             });
