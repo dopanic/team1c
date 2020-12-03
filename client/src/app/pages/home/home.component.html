@@ -22,37 +22,6 @@
                     </thead>
                     </table>
             </div>
-            <br><br><br><br><br><br><br>     
-            <!-- surveys-->
-            <h1> Active Surveys</h1>
-            <br>            
-            <div *ngFor = 'let survey of surveys; index as i' class="card m-1 p-1 bg-light" >       
-                <div class="card-body" style="height: 13px;">
-                    <table class="tg">
-                        <thead>
-                        <tr>
-                            <!-- Survey Title -->
-                            <th class="text-left col-3"  style="top: -10px;">
-                                <h6 class="card-title" >
-                                    {{survey.title}}
-                                </h6>
-                            </th>
-                            <th   *ngIf ='isLoggedIn()' class="text-center col-3" style="top: -15px;">
-                                <a href="survey/edit/{{survey._id}}" class="btn btn-secondary btn-sm" role = "button">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </th>
-                            <th  *ngIf ='isLoggedIn()' class="text-center col-2" style="top: -15px;">
-                                <button class="btn btn-danger btn-sm" role = "button" (click)="removeSurvey(survey, i)">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </th>
-                        </tr>
-                        </thead>
-                        </table>
-                </div>
-            </div> 
-            <br><br><br>
         </div>
     </div>
 </div>
