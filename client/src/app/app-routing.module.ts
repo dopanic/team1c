@@ -9,7 +9,7 @@ import { AuthGuard } from './admin/auth/auth.guard';
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
   {path: 'survey', component: SurveyComponent, data: {title: 'Survey'}, canActivate: [AuthGuard]},
-  {path: 'survey/add', component: EditComponent, data: {title: 'Add'}},
+  {path: 'survey/add', component: EditComponent, data: {title: 'Add'}, canActivate: [AuthGuard]},
   {path: 'survey/edit/:id', component: EditComponent, data: {title: 'Edit'}, canActivate: [AuthGuard]},
   {path: 'register', component: RegComponent, data: {title: 'register'}},
   {path: 'login', data: {title: 'Login'}, redirectTo: '/admin/auth', pathMatch: 'full'},

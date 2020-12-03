@@ -6,13 +6,17 @@ const surveySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userId: {
+        type: String,
+        required: true
+    },
     questionsArr: {
         type: Array,
         required: true
     }
 },
 {
-    collection: "surveys2"
+    collection: "surveys3"
 });
 
 const Survey = mongoose.model('survey', surveySchema);

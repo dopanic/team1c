@@ -33,4 +33,7 @@ export class AuthService
     {
         return this.datasource.logout();
     }
+    getUsername(): string {
+        return this.user.name;
+    }
 }

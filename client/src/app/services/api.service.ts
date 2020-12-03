@@ -7,7 +7,7 @@ import { User } from '../model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 const PROTOCOL = 'http';
-const PORT = 3000;
+const PORT = ':3000';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class ApiService {
     };
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-    this.baseUri = `${PROTOCOL}://${location.hostname}/api`;
+    this.baseUri = `${PROTOCOL}://${location.hostname}${PORT}/api`;
     this.user = new User();
   }
 
