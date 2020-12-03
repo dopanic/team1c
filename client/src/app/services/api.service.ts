@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { User } from '../model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const PROTOCOL = 'https';
-// const PORT = 3000;
+const PROTOCOL = 'http';
+const PORT = 3000;
 
 @Injectable({
   providedIn: 'root'
