@@ -15,9 +15,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/survey" style="color: black;">LIST OF SURVEYS</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/survey" style="color: black;">MY SURVEYS </a>
-            </li>
             <!-- COULD ADD MORE-->
             <li *ngIf ='isLoggedIn()' class="nav-item">
                 <a (click) = 'onLogoutClick()' class="nav-link"  style="color: black;">

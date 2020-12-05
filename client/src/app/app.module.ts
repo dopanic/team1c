@@ -31,7 +31,7 @@ export function jwtTokenGetter(): string
     SurveyComponent,
     EditComponent,
     HomeComponent
-  
+
   ],
   imports: [
     HttpClientModule,
@@ -40,7 +40,6 @@ export function jwtTokenGetter(): string
     FormsModule,
     ReactiveFormsModule,
     ModelModule,
-
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter
