@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', data: {title: 'Login'}, redirectTo: '/admin/auth', pathMatch: 'full'},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)/*, canActivate[AuthGuard]*/},
   {path: '', redirectTo: '/home', pathMatch: 'full', data: {title: 'Welcome'}}, // For index page
-  {path: '**', redirectTo: '/survey'}
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({

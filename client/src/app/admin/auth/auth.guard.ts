@@ -15,9 +15,8 @@ export class AuthGuard
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
     {
-        if(this.auth.authenticated)
+        if (this.auth.authenticated)
         {
-            console.log('authenticated');
             return true;
         }
         else
