@@ -18,6 +18,7 @@ import { ApiService } from './services/api.service';
 import { ModelModule } from './model/model.module';
 
 import {  JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+import { MysurveyComponent } from './pages/mysurvey/mysurvey.component';
 
 export function jwtTokenGetter(): string
 {
@@ -30,7 +31,8 @@ export function jwtTokenGetter(): string
     FooterComponent,
     SurveyComponent,
     EditComponent,
-    HomeComponent
+    HomeComponent,
+    MysurveyComponent
   
   ],
   imports: [
