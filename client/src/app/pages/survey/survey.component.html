@@ -1,14 +1,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <body>
 <p style="margin: 5em;"></p>
-<div class="container">
     <div class="row">
         <div class="container col-8 p-2">
             <!-- surveys-->
             <h1> Active Surveys</h1>
             <br>            
-            <div *ngFor = 'let survey of surveys; index as i' class="card m-1 p-1 bg-light" >       
-                <div class="card-body" style="height: 13px;">
+            <div *ngFor = 'let survey of surveys; index as i' class="card m-2 p-1 bg-light" >       
+                <div class="card-body" style="height: 13px; ">
                     <table class="tg">
                         <thead>
                         <tr>
@@ -35,6 +34,4 @@
             <br><br><br>
         </div>
     </div>
-</div>
-
 </body>
