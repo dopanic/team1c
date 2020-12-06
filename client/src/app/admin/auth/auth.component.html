@@ -32,30 +32,5 @@
                     <a href="/register">Sign up</a>          
                 </form>
                 </div>
-                <div data-ng-bind-html="item"></div>
-                <form class="box" autocomplete="off" #form = 'ngForm'
-                (ngSubmit) = 'authenticate(form)'>
-                <h1>Login</h1>
-                <fieldset class="form-group">
-                    <input type="text" class="form-control"
-                    [(ngModel)]='user.name'
-                    name='name' placeholder='Username'
-                    id='name' required autofocus autocomplete='off'>
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <input type="password" class="form-control"
-                    [(ngModel)]='user.password'
-                    name='password' placeholder='Password'
-                    id='password' required  autocomplete='off'>
-                </fieldset>
-
-                <fieldset class="form-group">
-                  <button class= "btn btn-primary m-1" type='submit'>
-                    login
-                    </button>  
-                </fieldset>   
-                <a href="/home">Sign up</a>          
-            </form>
         </main>
     </div>
