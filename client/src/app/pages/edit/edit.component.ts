@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service'; // Express API
-import swal from 'sweetalert';
+import Swal from 'sweetalert2'
 
 import { AuthService } from 'src/app/model/auth.service';
 import { User } from 'src/app/model/user.model';
@@ -92,7 +92,14 @@ export class EditComponent implements OnInit {
           .subscribe(res => {
             this.router.navigateByUrl('/survey');
             console.log('Updated successfully.');
-            swal("Nice!", "Updated Successfully ! ", "success");
+            // Success message to User
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Updated successfully !',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }, (err) => {
             console.log(err);
           });
@@ -101,7 +108,14 @@ export class EditComponent implements OnInit {
           .subscribe(res => {
               this.router.navigateByUrl('/survey');
               console.log('Created successfully.');
-              swal("Good job!", "Now your survey is ready !", "success");
+            // Success message to User
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Now your survey is ready !',
+              showConfirmButton: false,
+              timer: 1500
+            })
             }, (err) => {
               console.log(err);
             });
