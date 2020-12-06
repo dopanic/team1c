@@ -23,12 +23,12 @@
                 <a class="nav-link" href="/mysurvey" style="color: black;">MY SURVEYS </a>
             </li>
             <!-- COULD ADD MORE-->
-            <li *ngIf ='isLoggedIn()' class="nav-item">
+            <li *ngIf ='isLoggedIn()'>
                 <a (click) = 'onLogoutClick()' class="nav-link"  style="color: black;">
                     <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a>
             </li>
-            <li  *ngIf ='!isLoggedIn()'class="nav-item">
-                <a class="nav-link" href="/login" style="color: black;"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a>
+            <li  *ngIf ='!isLoggedIn()'>
+                <a class="nav-link" href="/login" style="color: black;"><i class="fas fa-lg fa-sign-in-alt" style="margin-right: 10px; margin-top: 5px;"></i> Login</a>
             </li>
         </ul>
     </div>

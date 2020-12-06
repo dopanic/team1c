@@ -9,7 +9,13 @@ body{
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    margin-top: 15px;
+    margin-top: 30px;
+  }
+
+  hr{
+    border-top: 2px dashed rgb(209, 209, 209);
+    width: 90%;
+    margin-top: 40px;
   }
   
   a {
@@ -28,7 +34,7 @@ body{
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    background-color: #f5f5f5;
+    background-color: #fafafa;
     width:55em;
     transform: translate(0%,-10%);
   }

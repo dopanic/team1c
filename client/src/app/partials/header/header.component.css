@@ -4,9 +4,10 @@
 
 div a{
     margin:10px;
+    letter-spacing:1px
 }
 
-div a:hover {
-    margin-bottom: 1px;
+div .nav-item:hover {
+    margin-bottom: -3px;
     border-bottom: 3px solid rgb(245, 192, 17);
   }
