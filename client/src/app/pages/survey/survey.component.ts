@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service'; // Express API
+import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-survey',
@@ -35,6 +37,7 @@ export class SurveyComponent implements OnInit {
     if (window.confirm('Are you sure?')) {
       this.apiService.removeSurvey(survey._id).subscribe(data => {
         this.surveys.splice(index, 1);
+        swal("Okay!", "Deleted Successfully ! ", "success");
       });
     }
   }

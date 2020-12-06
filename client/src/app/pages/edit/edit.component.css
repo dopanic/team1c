@@ -7,7 +7,11 @@ h1{
   }
 
 body{
-    margin-bottom: 100px;
+    background-image: url("../../../assets/loginBg3.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+    height: 70vh;
 }
 
 span{
@@ -22,10 +26,9 @@ label{
 /* Boxes */
 
 .container{
-    background-color: #f5f5f5c0;
+    background-color: #f5f5f5;
     width:60em;
     margin-top: 3em;
-    box-shadow: 10px 10px 15px 2px rgba(204, 204, 204, 0.527);  
     margin-bottom: 10em;
 
 }

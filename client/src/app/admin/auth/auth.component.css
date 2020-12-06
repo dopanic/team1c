@@ -34,6 +34,10 @@ fieldset{
     text-align: center;
     height: 500px;
     box-shadow: 10px 10px 15px 2px rgba(204, 204, 204, 0.527);  
+    margin-bottom: 80px;
+    margin-top: 60px;
+
+
 }
 
 .box input[type = "text"], .box input[type= "password"]{
