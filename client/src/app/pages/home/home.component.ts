@@ -43,10 +43,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  scrollToElement($element): void {
-    console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-  }
   isLoggedIn(): boolean
   {
     const result = this.AuthService.authenticated;
