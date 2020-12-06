@@ -1,5 +1,16 @@
+body{
+  /* background-image: url("../../../assets/loginBg2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
+  /* height: 75vh; */
+}
+
 h1{
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+
 }
 
 a {
@@ -18,8 +29,9 @@ a {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  background-color: #f5f5f5c0;
+  background-color: #f5f5f581;
   width:55em;
+  box-shadow: 10px 10px 15px 2px rgba(204, 204, 204, 0.527);  
 }
 
 .center {
@@ -69,10 +81,4 @@ a {
 .tableBtnSurveys {
   margin-left: auto;
   margin-right: auto;
-}
-
-/* Gap */
-
-.gap{
-  margin: 5em;
 }
