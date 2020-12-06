@@ -7,42 +7,37 @@ import { User } from '../../model/user.model';
 
 @Component({
 
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  templateUrl: './reg.component.html',
+  styleUrls: ['./reg.component.css']
 })
-export class AuthComponent implements OnInit {
-  
+export class RegComponent implements OnInit {
+
   public user: User;
   public errorMessage: string;
-
   constructor(private router: Router,
-              private auth: AuthService) { }
+    private auth: AuthService) { }
 
   ngOnInit(): void {
     this.user = new User();
-    console.log('test');
   }
-  
-  authenticate( form : NgForm) : void
+  register ( form : NgForm) : void
   {
-    
     if(form.valid)
     {
-      // perform authentication
-      this.auth.authenticate(this.user).subscribe(data =>{
+      this.auth.registerUser(this.user).subscribe(data =>{
         if(data.success)
         {
-          
           this.auth.storeUserData(data.token, data.user);
-          this.router.navigateByUrl('/survey');
+          this.router.navigateByUrl('survey');
+          alert("Registeration Succesful");
         }
         else
         {
-          this.errorMessage = 'Invalid user/password';
+          this.errorMessage = 'Could Not Register';
         }
       });
 
-      this.router.navigateByUrl("admin/main");
+      
     }
     else
     {

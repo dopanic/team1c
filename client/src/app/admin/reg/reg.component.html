@@ -8,13 +8,25 @@
                     </div>
                     <div data-ng-bind-html="item"></div>
                     <form class="box" autocomplete="off" #form = 'ngForm'
-                    (ngSubmit) = 'authenticate(form)'>
-                    <h1>Login</h1>
+                    (ngSubmit) = 'register(form)'>
+                    <h1>Register</h1>
                     <fieldset class="form-group">
                         <input type="text" class="form-control"
                         [(ngModel)]='user.email'
-                        name='email' placeholder='Username'
+                        name='email' placeholder='Username/email'
                         id='email' required autofocus autocomplete='off'>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control"
+                        [(ngModel)]='user.number'
+                        name='number' placeholder='number'
+                        id='number' required  autocomplete='off'>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control"
+                        [(ngModel)]='user.name'
+                        name='name' placeholder='name'
+                        id='name' required  autocomplete='off'>
                     </fieldset>
 
                     <fieldset class="form-group">
@@ -26,36 +38,11 @@
 
                     <fieldset class="form-group">
                       <button class= "btn btn-primary m-1" type='submit'>
-                        login
+                        submit
                         </button>  
                     </fieldset>   
-                    <a href="/register">Sign up</a>          
+      
                 </form>
                 </div>
-                <div data-ng-bind-html="item"></div>
-                <form class="box" autocomplete="off" #form = 'ngForm'
-                (ngSubmit) = 'authenticate(form)'>
-                <h1>Login</h1>
-                <fieldset class="form-group">
-                    <input type="text" class="form-control"
-                    [(ngModel)]='user.name'
-                    name='name' placeholder='Username'
-                    id='name' required autofocus autocomplete='off'>
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <input type="password" class="form-control"
-                    [(ngModel)]='user.password'
-                    name='password' placeholder='Password'
-                    id='password' required  autocomplete='off'>
-                </fieldset>
-
-                <fieldset class="form-group">
-                  <button class= "btn btn-primary m-1" type='submit'>
-                    login
-                    </button>  
-                </fieldset>   
-                <a href="/home">Sign up</a>          
-            </form>
-        </main>
-    </div>
+            </main>
+        </div>

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service'; // Express API
 import swal from 'sweetalert';
 
+import { AuthService } from 'src/app/model/auth.service';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-edit',
@@ -12,35 +14,50 @@ import swal from 'sweetalert';
 })
 export class EditComponent implements OnInit {
 
+  user: User;
   surveyForm: FormGroup;
 
   constructor(
     public fb: FormBuilder,
     private actRoute: ActivatedRoute,
     private apiService: ApiService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.user = new User();
     this.surveyForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
+      userId: this.getUserId(),
       questionsArr: this.fb.array([
           this.initQuestions(),
       ])
     });
     const id = this.actRoute.snapshot.paramMap.get('id');
-    if(typeof(id) !== undefined) {
+    if (id !== null) {
       this.setSurvey(id);
     }
   }
 
-  setSurvey(id: string): void{
+  getUserId(): string {
+    if (this.authService.authenticated)
+    {
+      const userArr = JSON.parse(localStorage.getItem('user'));
+      return userArr.id;
+    } else {
+      return null;
+    }
+  }
+
+  setSurvey(id: string): void {
     this.apiService.getSurveyOne(id).subscribe(data => {
       for (let i = 0; i < data.questionsArr.length - 1; i++) {
         this.addQuestion();
       }
       this.surveyForm.setValue({
         title: data.title,
+        userId: data.userId,
         questionsArr: data.questionsArr
       });
     });

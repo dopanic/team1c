@@ -7,7 +7,7 @@ import { User } from '../model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 const PROTOCOL = 'http';
-const PORT = 3000;
+const PORT = ':3000';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class ApiService {
     };
 
   constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-    this.baseUri = `${PROTOCOL}://${location.hostname}:${PORT}/api`;
+    this.baseUri = `${PROTOCOL}://${location.hostname}${PORT}/api`;
     this.user = new User();
   }
 
@@ -58,14 +58,22 @@ export class ApiService {
 
   // delete: delete a survey
   removeSurvey(id): Observable<any> {
-    const url = `${this.baseUri}/survey/del/${id}`;
-    return this.http.get(url);
+    if(this.loggedIn)
+    {
+      const url = `${this.baseUri}/survey/del/${id}`;
+      return this.http.get(url);
+    }
+  }
+
+  registerUser(user): Observable<any> {
+    const url = `${this.baseUri}/users/signup`;
+    return this.http.post(url, user);
   }
 
   authenticate(user: User): Observable<any>
   {
-    const url = `${this.baseUri}/login`;
-    return this.http.post<any>(url,user, this.httpOptions);
+    const url = `${this.baseUri}/users/login`;
+    return this.http.post<any>(url, user, this.httpOptions);
   }
   storeUserData(token: any, user:User): void
   {
@@ -78,19 +86,17 @@ export class ApiService {
   {
     return !this.jwtService.isTokenExpired(this.authToken);
   }
-  logout(): Observable<any>
+  logout(): void
   {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
 
-    return this.http.get<any>(this.baseUri);
-
   }
   getSurveys(): Observable<any>
   {
     this.loadToken();
-    return this.http.get<any>(this.baseUri+'surveys');
+    return this.http.get<any>(this.baseUri + 'surveys');
   }
   private loadToken(): void
   {

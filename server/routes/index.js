@@ -7,5 +7,6 @@ let indexController = require('../controllers/index');
 router.get('/', indexController.renderIndexPage);
 router.post('/login', indexController.processLoginPage);
 router.post('/register', indexController.processRegisterPage);
-router.get('/logout', indexController.performLogout);
+// router.get('/logout', indexController.performLogout);
+
 module.exports = router;
