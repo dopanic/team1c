@@ -103,7 +103,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  onSubmit(): boolean {
+  onSubmit(): boolean { 
     if (!this.surveyForm.valid) {
       return false;
     } else {
