@@ -45,21 +45,28 @@ export class MysurveyComponent implements OnInit {
   }
 
   removeSurvey(survey: any, index: number): void {
-    if (window.confirm('Are you sure?')) {
-      this.apiService.removeSurvey(survey._id).subscribe(data => {
-        this.surveys.splice(index, 1);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#6bbf3d',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Delete'
+    }).then(
+      (result) => {
+      if (result.isConfirmed) {
+        this.apiService.removeSurvey(survey._id).subscribe(data => {
+          this.surveys.splice(index, 1);});
         // Success message to User
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'The survey is deleted !',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        
-      });
-    }
-  }
+        Swal.fire(
+          'Deleted !',
+          'The survey has been deleted.',
+          'success'
+        )
+      }
+    })
+}
 
 
   scrollToElement($element): void {

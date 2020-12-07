@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 import { AuthService } from 'src/app/model/auth.service';
 import { User } from 'src/app/model/user.model';
-import { userInfo } from 'os';
+
 
 @Component({
   selector: 'app-edit',
