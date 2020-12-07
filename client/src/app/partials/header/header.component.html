@@ -30,7 +30,7 @@
 
             <!-- COULD ADD MORE-->
             <li *ngIf ='isLoggedIn()'>
-                <a (click) = 'onLogoutClick()' class="nav-link" href="#"  style="color: black;">
+                <a (click) = 'onLogoutClick()' class="nav-link" href="/login"  style="color: black;">
                     <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a>
             </li>
             <li  *ngIf ='!isLoggedIn()'>

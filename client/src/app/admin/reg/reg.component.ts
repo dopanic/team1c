@@ -20,7 +20,7 @@ export class RegComponent implements OnInit {
   ngOnInit(): void {
     this.user = new User();
   }
-  register ( form : NgForm) : void
+  register ( form : NgForm ) : void
   {
     if(form.valid)
     {

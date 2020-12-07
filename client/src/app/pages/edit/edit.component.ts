@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 
 import { AuthService } from 'src/app/model/auth.service';
 import { User } from 'src/app/model/user.model';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-edit',
@@ -34,10 +35,31 @@ export class EditComponent implements OnInit {
           this.initQuestions(),
       ])
     });
+    // Edit page
     const id = this.actRoute.snapshot.paramMap.get('id');
-    if (id !== null) {
-      this.setSurvey(id);
-    }
+    this.user = JSON.parse(localStorage.getItem('user'));
+
+    // If user enter the address that other user's edit survey page, it will be blocked to enter
+    this.apiService.getSurveyOne(id).subscribe(data => {
+      this.surveyForm.setValue({
+        title: data.title,
+        userId: data.userId,
+        questionsArr: data.questionsArr
+      });
+      if (id !== null  && data.userId == this.user.id) {
+        this.setSurvey(id);
+      }
+      else{
+        this.router.navigateByUrl('/survey');
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Sorry, invalid address given',
+          showConfirmButton: false,
+          timer: 1500
+        })         
+      }
+    });
   }
 
   getUserId(): string {
