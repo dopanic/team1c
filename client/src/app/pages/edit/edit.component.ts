@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service'; // Express API
-import Swal from 'sweetalert2'
-
+import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/model/auth.service';
 import { User } from 'src/app/model/user.model';
-import { userInfo } from 'os';
 
 @Component({
   selector: 'app-edit',
@@ -46,7 +44,7 @@ export class EditComponent implements OnInit {
         userId: data.userId,
         questionsArr: data.questionsArr
       });
-      if (id !== null  && data.userId == this.user.id) {
+      if (id !== null  && data.userId === this.user.id) {
         this.setSurvey(id);
       }
       else{
@@ -54,10 +52,10 @@ export class EditComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: 'Sorry, invalid address given',
+          title: 'Cannot Access',
           showConfirmButton: false,
           timer: 1500
-        })         
+        });
       }
     });
   }
@@ -121,7 +119,7 @@ export class EditComponent implements OnInit {
               title: 'Updated successfully !',
               showConfirmButton: false,
               timer: 1500
-            })
+            });
           }, (err) => {
             console.log(err);
           });
@@ -131,13 +129,13 @@ export class EditComponent implements OnInit {
               this.router.navigateByUrl('/survey');
               console.log('Created successfully.');
             // Success message to User
-            Swal.fire({
+              Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Now your survey is ready !',
+              title: 'Now your survey is ready!',
               showConfirmButton: false,
               timer: 1500
-            })
+            });
             }, (err) => {
               console.log(err);
             });

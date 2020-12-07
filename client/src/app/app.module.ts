@@ -42,7 +42,6 @@ export function jwtTokenGetter(): string
     FormsModule,
     ReactiveFormsModule,
     ModelModule,
-
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter

@@ -4,8 +4,7 @@
     <div class="row">
         <div class="container col-8 p-2">
             <!-- surveys-->
-            <h1> Active Surveys</h1>
-            <hr>
+            <h1>Survey List</h1>
             <br>            
             <div *ngFor = 'let survey of surveys; index as i' class="card m-2 p-1 bg-white" >       
                 <div class="card-body" style="height: 13px; ">
@@ -17,21 +16,19 @@
                                     {{survey.title}}
                                 </h6>
                             </th>
-                            <!--
-                            <th class="text-center col-3" style="top: -15px;">
+                            <th *ngIf="hasPrivilege(survey.userId)" class="text-center col-3" style="top: -15px;">
                                 <a href="survey/edit/{{survey._id}}" class="btn btn-secondary btn-sm" role = "button">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </th>
-                            <th class="text-center col-2" style="top: -15px;">
+                            <th *ngIf="hasPrivilege(survey.userId)" class="text-center col-2" style="top: -15px;">
                                 <button class="btn btn-danger btn-sm" role = "button" (click)="removeSurvey(survey, i)">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </th>
-                            -->
                         </tr>
                         </thead>
-                        </table>
+                    </table>
                 </div>
             </div> 
             <br><br><br>
